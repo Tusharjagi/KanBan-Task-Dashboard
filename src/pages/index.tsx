@@ -1,5 +1,13 @@
-import { HomeScreen } from '@/common/screens/home'
+import Head from "next/head";
+import { HomeScreen } from "@/common/screens/home";
 
 export default function Home() {
-  return <HomeScreen />
+  return (
+    <>
+      <Head>
+        <title>Kanban Dashboard</title>
+      </Head>
+      <HomeScreen />
+    </>
+  );
 }
