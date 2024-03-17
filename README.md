@@ -1,4 +1,4 @@
-# Kanban task management web app
+# Kanban dashboard
 
 Streamline your tasks with our task manager. Stay organized, prioritize
 your to-do list, and track progress all in one place. Boost productivity
@@ -6,7 +6,7 @@ and achieve your goals effortlessly.
 
 ## Table of contents
 
-- [Kanban task management web app](#kanban-task-management-web-app)
+- [Kanban dashboard](#kanban-dashboard)
   - [Table of contents](#table-of-contents)
   - [Overview](#overview)
     - [The challenge](#the-challenge)

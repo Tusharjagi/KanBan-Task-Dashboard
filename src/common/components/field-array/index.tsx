@@ -1,20 +1,20 @@
-import { Button } from '@/common/ui/button'
-import { Input, InputField } from '@/common/ui/input'
-import { useState, Dispatch, SetStateAction, ChangeEvent } from 'react'
-import { AiOutlineCloseSquare, AiOutlinePlusSquare } from 'react-icons/ai'
-import tw from 'tailwind-styled-components'
+import { Button } from "@/common/ui/button";
+import { Input, InputField } from "@/common/ui/input";
+import { useState, Dispatch, SetStateAction, ChangeEvent } from "react";
+import { AiOutlineCloseSquare, AiOutlinePlusSquare } from "react-icons/ai";
+import tw from "tailwind-styled-components";
 
 interface IItem {
-  id: string
-  [key: string]: any
+  id: string;
+  [key: string]: any;
 }
 
 interface IProps<T extends IItem, K extends keyof T> {
-  values: T[]
-  setValues: Dispatch<SetStateAction<T[]>>
-  titleSelector: K
-  addValue: (value: string) => void
-  removeValue: (index: number) => void
+  values: T[];
+  setValues: Dispatch<SetStateAction<T[]>>;
+  titleSelector: K;
+  addValue: (value: string) => void;
+  removeValue: (index: number) => void;
 }
 
 export function FieldArray<T extends IItem, K extends keyof T>({
@@ -24,20 +24,19 @@ export function FieldArray<T extends IItem, K extends keyof T>({
   addValue,
   removeValue,
 }: IProps<T, K>) {
-  const handleOnChange =
-    (index: number) => (e: ChangeEvent<HTMLInputElement>) => {
-      const newValues = [...values]
-      newValues[index] = {
-        ...newValues[index],
-        [titleSelector]: e.target.value,
-      } as T
+  const handleOnChange = (index: number) => (e: ChangeEvent<HTMLInputElement>) => {
+    const newValues = [...values];
+    newValues[index] = {
+      ...newValues[index],
+      [titleSelector]: e.target.value,
+    } as T;
 
-      setValues(newValues)
-    }
+    setValues(newValues);
+  };
 
   const handleRemoveItem = (index: number) => () => {
-    removeValue(index)
-  }
+    removeValue(index);
+  };
 
   return (
     <Wrapper>
@@ -58,45 +57,36 @@ export function FieldArray<T extends IItem, K extends keyof T>({
       ))}
       <AddColumnField addColumn={addValue} />
     </Wrapper>
-  )
+  );
 }
 
-const AddColumnField = ({
-  addColumn,
-}: {
-  addColumn: (value: string) => void
-}) => {
-  const [title, setTitle] = useState('')
+const AddColumnField = ({ addColumn }: { addColumn: (value: string) => void }) => {
+  const [title, setTitle] = useState("");
 
   const handleOnChange = (e: ChangeEvent<HTMLInputElement>) => {
-    setTitle(e.target.value)
-  }
+    setTitle(e.target.value);
+  };
 
   const handleAddItem = () => {
-    addColumn(title)
-    setTitle('')
-  }
+    addColumn(title);
+    setTitle("");
+  };
 
   return (
     <div className="flex">
       <Input>
         <InputField value={title} onChange={handleOnChange} />
       </Input>
-      <ActionButton
-        type="button"
-        button_type="none"
-        corner_type="rounded"
-        onClick={handleAddItem}
-      >
+      <ActionButton type="button" button_type="none" corner_type="rounded" onClick={handleAddItem}>
         <AiOutlinePlusSquare className="text-indigo-500 text-xl" />
       </ActionButton>
     </div>
-  )
-}
+  );
+};
 
 const Wrapper = tw.div`
 space-y-2
-`
+`;
 
 const ActionButton = tw(Button)`
 flex
@@ -110,4 +100,4 @@ dark:bg-white/10
 dark:hover:bg-opacity-20
 w-[34px]
 h-[34px]
-`
+`;
