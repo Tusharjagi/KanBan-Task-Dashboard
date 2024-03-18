@@ -7,6 +7,10 @@ module.exports = {
       colors: {
         "dark-gunmetal": "#20212c",
         "alice-blue": "#f4f7fd",
+        gunmetal: "#2b2c37",
+      },
+      maxWidth: {
+        180: "11.25rem",
       },
     },
   },
