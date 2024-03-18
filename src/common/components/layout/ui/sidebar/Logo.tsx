@@ -1,5 +1,4 @@
 import Image from "next/image";
-import { useRouter } from "next/router";
 import { useDispatch } from "react-redux";
 
 import tw from "tailwind-styled-components";
@@ -10,7 +9,6 @@ import { mainActions } from "@/common/store/slices/main";
 
 export function Logo() {
   const { theme } = useAppSelector((x) => x.themeSlice);
-  const router = useRouter();
   const dispatch = useDispatch();
 
   const handleOnSelect = (index: number) => () => {
