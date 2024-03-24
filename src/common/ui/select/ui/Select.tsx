@@ -7,12 +7,13 @@ import {
   ButtonHTMLAttributes,
   useLayoutEffect,
   ReactElement,
-} from 'react'
-import { SelectProvider, useSelectContext } from '../model/SelectProvider'
-import tw from 'tailwind-styled-components'
-import { useOutside } from '@/common/hooks/useOutside'
-import { FiChevronDown, FiChevronUp } from 'react-icons/fi'
-import { SelectOption } from './SelectOption'
+} from "react";
+import tw from "tailwind-styled-components";
+import { FiChevronDown, FiChevronUp } from "react-icons/fi";
+
+import { SelectProvider, useSelectContext } from "../model/SelectProvider";
+import { useOutside } from "@/common/hooks/useOutside";
+import { SelectOption } from "./SelectOption";
 
 interface IProps
   extends Omit<
@@ -20,49 +21,52 @@ interface IProps
       ButtonHTMLAttributes<HTMLButtonElement>,
       HTMLButtonElement
     >,
-    'onChange'
+    "onChange"
   > {
-  value?: any
-  onChange: (value: any) => void
-  placeHolderText?: string
+  value?: any;
+  onChange: (value: any) => void;
+  placeHolderText?: string;
 }
 
 function WrappedComponent({
   value,
   children,
-  placeHolderText = 'None',
+  placeHolderText = "None",
   ...rest
-}: Omit<IProps, 'onChange'>) {
-  const labelRef = useRef<HTMLButtonElement>(null)
-  const listRef = useRef<HTMLUListElement>(null)
+}: Readonly<Omit<IProps, "onChange">>) {
+  const labelRef = useRef<HTMLButtonElement>(null);
+  const listRef = useRef<HTMLUListElement>(null);
 
   const { expanded, viewNode, toggle, changeExpanded, changeValue } =
-    useSelectContext()
+    useSelectContext();
 
   useOutside(
     [listRef as any, labelRef],
     useCallback(() => {
-      changeExpanded(false)
-    }, [changeExpanded])
-  )
+      changeExpanded(false);
+    }, [changeExpanded]),
+  );
 
   useLayoutEffect(() => {
     Children.forEach(children, (child) => {
-      const element = child as ReactElement
+      const element = child as ReactElement;
+      console.log(element.props.value);
+      console.log("value", value);
       if (element.type === SelectOption) {
         if (element.props.value === value) {
-          changeValue(value, element.props.children)
+          changeValue(value, element.props.children);
         }
       }
-    })
-  }, [])
+    });
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
 
-  const label = viewNode ?? placeHolderText
+  const label = viewNode ?? placeHolderText;
 
   const Icon = useMemo(
     () => (expanded ? FiChevronUp : FiChevronDown),
-    [expanded]
-  )
+    [expanded],
+  );
 
   return (
     <Wrapper>
@@ -72,20 +76,20 @@ function WrappedComponent({
       </SelectLabel>
       {expanded && <SelectList ref={listRef}>{children}</SelectList>}
     </Wrapper>
-  )
+  );
 }
 
-export function Select({ value, onChange, ...rest }: IProps) {
+export function Select({ value, onChange, ...rest }: Readonly<IProps>) {
   return (
     <SelectProvider value={value} onChange={onChange}>
       <WrappedComponent value={value} {...rest} />
     </SelectProvider>
-  )
+  );
 }
 
 const Wrapper = tw.div`
 relative
-`
+`;
 
 const SelectLabel = tw.button`
 flex
@@ -101,7 +105,7 @@ rounded-md
 border-[1px]
 h-10
 border-[#828fa3]
-`
+`;
 
 const SelectList = tw.ul`
 list-none
@@ -113,6 +117,6 @@ translate-y-[100%]
 p-2
 rounded-md
 drop-shadow-md
-bg-[#f4f7fd]
-dark:bg-[#20212c]
-`
+bg-alice-blue
+dark:bg-dark-gunmetal
+`;
