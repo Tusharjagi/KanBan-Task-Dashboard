@@ -4,7 +4,7 @@ import { Portal } from "../portal";
 import { Backdrop } from "../backdrop";
 import { Button } from "../button";
 
-interface IProps {
+type DialogType = {
   title: string;
   subtitle: string;
   confirmText: string;
@@ -13,7 +13,7 @@ interface IProps {
   onClose: VoidFunction;
   onConfirm?: VoidFunction;
   onCancel?: VoidFunction;
-}
+};
 
 export function Dialog({
   open,
@@ -24,7 +24,7 @@ export function Dialog({
   cancelText,
   onConfirm,
   onCancel,
-}: IProps) {
+}: DialogType) {
   return (
     open && (
       <Portal>
@@ -34,7 +34,9 @@ export function Dialog({
             <Subtitle>{subtitle}</Subtitle>
             <ActionsRow>
               <ConfirmButton onClick={onConfirm}>{confirmText}</ConfirmButton>
-              <CancelButton onClick={onCancel ?? onClose}>{cancelText}</CancelButton>
+              <CancelButton onClick={onCancel ?? onClose}>
+                {cancelText}
+              </CancelButton>
             </ActionsRow>
           </Modal>
         </Wrapper>
@@ -64,7 +66,7 @@ dark:bg-gunmetal
 max-w-sm
 dark:shadow-lg
 rounded-md
-dark:shadow-[#454757]/50
+dark:shadow-black-sapphire/50
 `;
 
 const Title = tw.h2`
