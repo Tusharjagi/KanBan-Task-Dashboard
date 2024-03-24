@@ -1,17 +1,17 @@
-import tw from 'tailwind-styled-components'
-import { DetailedHTMLProps, LabelHTMLAttributes } from 'react'
-import { useTextAreaContext } from '../model/TextAreaProvider'
+import { DetailedHTMLProps, LabelHTMLAttributes } from "react";
+import tw from "tailwind-styled-components";
 
-interface IProps
-  extends Omit<
-    DetailedHTMLProps<LabelHTMLAttributes<HTMLLabelElement>, HTMLLabelElement>,
-    'htmlFor'
-  > {}
+import { useTextAreaContext } from "../model/TextAreaProvider";
 
-export function TextAreaLabel(props: IProps) {
-  const { textAreaId } = useTextAreaContext()
+type TextAreaLabelType = Omit<
+  DetailedHTMLProps<LabelHTMLAttributes<HTMLLabelElement>, HTMLLabelElement>,
+  "htmlFor"
+>;
 
-  return <Wrapper htmlFor={textAreaId} {...props} />
+export function TextAreaLabel(props: Readonly<TextAreaLabelType>) {
+  const { textAreaId } = useTextAreaContext();
+
+  return <Wrapper htmlFor={textAreaId} {...props} />;
 }
 
 const Wrapper = tw.label`
@@ -21,4 +21,4 @@ dark:text-white
 text-sm
 mb-2
 font-bold
-`
+`;
