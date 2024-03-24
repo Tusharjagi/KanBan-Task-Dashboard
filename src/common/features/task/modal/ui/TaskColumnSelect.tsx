@@ -1,15 +1,16 @@
-import { TableColumnType } from "@/common/types/TableColumnType";
 import { Dispatch, SetStateAction, memo } from "react";
+
+import { TableColumnType } from "@/common/types/TableColumnType";
 import { Select, SelectOption } from "@/common/ui/select";
 
-interface IProps {
+type TaskColumnSelectType = {
   columns: TableColumnType[];
   selectedIndex: number;
   setSelectedIndex: Dispatch<SetStateAction<number>>;
-}
+};
 
 export const TaskColumnSelect = memo(
-  ({ columns, selectedIndex, setSelectedIndex }: IProps) => {
+  ({ columns, selectedIndex, setSelectedIndex }: TaskColumnSelectType) => {
     const handleOnChange = (value: number) => {
       setSelectedIndex(value);
     };
