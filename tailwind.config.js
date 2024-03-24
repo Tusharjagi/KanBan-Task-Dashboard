@@ -1,7 +1,10 @@
 /** @type {import('tailwindcss').Config} */
 module.exports = {
   darkMode: "class",
-  content: ["./src/pages/**/*.{js,ts,jsx,tsx,mdx}", "./src/common/**/*.{js,ts,jsx,tsx,mdx}"],
+  content: [
+    "./src/pages/**/*.{js,ts,jsx,tsx,mdx}",
+    "./src/common/**/*.{js,ts,jsx,tsx,mdx}",
+  ],
   theme: {
     extend: {
       colors: {
@@ -17,6 +20,9 @@ module.exports = {
       },
       height: {
         34: "2.125rem",
+      },
+      maxWidth: {
+        416: "26rem",
       },
     },
   },
