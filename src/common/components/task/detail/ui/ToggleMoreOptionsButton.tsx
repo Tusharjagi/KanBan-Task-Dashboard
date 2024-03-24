@@ -1,20 +1,21 @@
-import { Button } from "@/common/ui/button";
-import { MenuList, MenuListItem } from "@/common/ui/menu-list";
 import { useState } from "react";
 import { BiEdit } from "react-icons/bi";
 import { RiDeleteBin5Line } from "react-icons/ri";
 import { CiSquareMore } from "react-icons/ci";
+
+import { Button } from "@/common/ui/button";
+import { MenuList, MenuListItem } from "@/common/ui/menu-list";
 import { TableColumnType } from "@/common/types/TableColumnType";
 import { TaskType } from "@/common/types/TaskType";
 import { EditTaskModal, DeleteTaskModal } from "@/common/features/task";
 
-interface IProps {
+type ToggleMoreOptionsButtonType = {
   tableIndex: number;
   columnIndex: number;
   taskIndex: number;
   task: TaskType;
   columns: TableColumnType[];
-}
+};
 
 export function ToggleMoreOptionsButton({
   tableIndex,
@@ -22,7 +23,7 @@ export function ToggleMoreOptionsButton({
   taskIndex,
   task,
   columns,
-}: IProps) {
+}: Readonly<ToggleMoreOptionsButtonType>) {
   const [anchorEl, setAnchorEl] = useState<HTMLButtonElement | null>(null);
   const [openEditModal, setOpenEditModal] = useState(false);
   const [openDeleteDialog, setOpenDeleteDialog] = useState(false);
