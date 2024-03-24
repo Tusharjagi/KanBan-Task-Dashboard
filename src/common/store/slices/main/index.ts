@@ -6,12 +6,12 @@ import { TableColumnType } from "@/common/types/TableColumnType";
 import { TaskType } from "@/common/types/TaskType";
 import { generateUniqueId, removeItemFromArray } from "@/common/utils";
 
-type createSliceType = {
+type initialStateType = {
   tables: TableType[];
   selectedTableIndex?: number;
 };
 
-const initialState: createSliceType = {
+const initialState: initialStateType = {
   tables: tableDataBase,
 };
 
