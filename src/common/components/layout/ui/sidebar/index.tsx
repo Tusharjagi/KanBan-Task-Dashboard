@@ -7,12 +7,12 @@ import { bool2string, string2bool } from "@/common/utils";
 import { TableList } from "@/common/components/table/list";
 import { Logo } from "./Logo";
 
-interface IProps {
+type SidebarType = {
   expanded: boolean;
   isDesktop: boolean;
-}
+};
 
-export function Sidebar({ expanded, isDesktop }: Readonly<IProps>) {
+export function Sidebar({ expanded, isDesktop }: Readonly<SidebarType>) {
   const [mounted, setMounted] = useState(false);
 
   useEffect(() => {
@@ -49,11 +49,11 @@ min-h-screen
 w-64
 `;
 
-interface IWrapperProps {
+type WrapperType = {
   $expanded: "true" | "false";
-}
+};
 
-const Wrapper = tw.aside<IWrapperProps>`
+const Wrapper = tw.aside<WrapperType>`
 absolute
 top-0
 flex
