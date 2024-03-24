@@ -5,35 +5,36 @@ import { Button } from "@/common/ui/button";
 import { Input, InputField } from "@/common/ui/input";
 import tw from "tailwind-styled-components";
 
-interface IItem {
+type ItemType = {
   id: string;
   [key: string]: any;
-}
+};
 
-interface IProps<T extends IItem, K extends keyof T> {
+type FieldArrayType<T extends ItemType, K extends keyof T> = {
   values: T[];
   setValues: Dispatch<SetStateAction<T[]>>;
   titleSelector: K;
   addValue: (value: string) => void;
   removeValue: (index: number) => void;
-}
+};
 
-export function FieldArray<T extends IItem, K extends keyof T>({
+export function FieldArray<T extends ItemType, K extends keyof T>({
   values,
   setValues,
   titleSelector,
   addValue,
   removeValue,
-}: Readonly<IProps<T, K>>) {
-  const handleOnChange = (index: number) => (e: ChangeEvent<HTMLInputElement>) => {
-    const newValues = [...values];
-    newValues[index] = {
-      ...newValues[index],
-      [titleSelector]: e.target.value,
-    } as T;
+}: Readonly<FieldArrayType<T, K>>) {
+  const handleOnChange =
+    (index: number) => (e: ChangeEvent<HTMLInputElement>) => {
+      const newValues = [...values];
+      newValues[index] = {
+        ...newValues[index],
+        [titleSelector]: e.target.value,
+      } as T;
 
-    setValues(newValues);
-  };
+      setValues(newValues);
+    };
 
   const handleRemoveItem = (index: number) => () => {
     removeValue(index);
@@ -61,7 +62,11 @@ export function FieldArray<T extends IItem, K extends keyof T>({
   );
 }
 
-const AddColumnField = ({ addColumn }: { addColumn: (value: string) => void }) => {
+const AddColumnField = ({
+  addColumn,
+}: {
+  addColumn: (value: string) => void;
+}) => {
   const [title, setTitle] = useState("");
 
   const handleOnChange = (event: ChangeEvent<HTMLInputElement>) => {
@@ -78,7 +83,12 @@ const AddColumnField = ({ addColumn }: { addColumn: (value: string) => void }) =
       <Input>
         <InputField value={title} onChange={handleOnChange} />
       </Input>
-      <ActionButton type="button" button_type="none" corner_type="rounded" onClick={handleAddItem}>
+      <ActionButton
+        type="button"
+        button_type="none"
+        corner_type="rounded"
+        onClick={handleAddItem}
+      >
         <AiOutlinePlusSquare className="text-indigo-500 text-xl" />
       </ActionButton>
     </div>
