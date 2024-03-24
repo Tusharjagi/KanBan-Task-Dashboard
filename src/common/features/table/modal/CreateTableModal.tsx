@@ -1,22 +1,22 @@
 import { FormEvent, useRef, useState } from "react";
-import { useAppDispatch } from "@/common/hooks/useRedux";
-
-import { Modal, ModalTitle } from "@/common/ui/modal";
 import tw from "tailwind-styled-components";
+import { v4 as uuid } from "uuid";
+
+import { useAppDispatch } from "@/common/hooks/useRedux";
+import { Modal, ModalTitle } from "@/common/ui/modal";
 import { Button } from "@/common/ui/button";
 import { DEFAULT_COLUMNS_VALUES } from "@/common/data/constants";
 import { mainActions } from "@/common/store/slices/main";
 import { TableColumnType } from "@/common/types/TableColumnType";
 import { TableTitleField } from "./ui/TableTitleField";
 import { TableColumns } from "./ui/TableColumns";
-import { v4 as uuid } from "uuid";
 
-interface IProps {
+type CreateTableModal = {
   open: boolean;
   onClose: VoidFunction;
-}
+};
 
-export function CreateTableModal(props: Readonly<IProps>) {
+export function CreateTableModal(props: Readonly<CreateTableModal>) {
   const ref = useRef<HTMLFormElement>(null);
 
   const [title, setTitle] = useState("");
