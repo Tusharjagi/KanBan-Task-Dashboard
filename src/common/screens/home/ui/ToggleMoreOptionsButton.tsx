@@ -8,15 +8,15 @@ import { MenuList, MenuListItem } from "@/common/ui/menu-list";
 import { EditTableModal, DeleteTableModal } from "@/common/features/table";
 import { TableType } from "@/common/types/TableType";
 
-interface IProps {
+type ToggleMoreOptionsButtonType = {
   table: TableType;
   tableIndex: number;
-}
+};
 
 export function ToggleMoreOptionsButton({
   table,
   tableIndex,
-}: Readonly<IProps>) {
+}: Readonly<ToggleMoreOptionsButtonType>) {
   const [anchorEl, setAnchorEl] = useState<HTMLButtonElement | null>(null);
   const [openEditModal, setOpenEditModal] = useState(false);
   const [openDeleteDialog, setOpenDeleteDialog] = useState(false);
