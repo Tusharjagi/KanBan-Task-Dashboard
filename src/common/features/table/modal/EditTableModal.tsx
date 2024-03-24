@@ -10,19 +10,19 @@ import { TableTitleField } from "./ui/TableTitleField";
 import { TableColumns } from "./ui/TableColumns";
 import { TableType } from "@/common/types/TableType";
 
-interface IProps {
+type EditTableModalType = {
   open: boolean;
   onClose: VoidFunction;
   table: TableType;
   tableIndex: number;
-}
+};
 
 export function EditTableModal({
   open,
   onClose: handleClose,
   table,
   tableIndex,
-}: Readonly<IProps>) {
+}: Readonly<EditTableModalType>) {
   const modalProps = { open, onClose: handleClose };
 
   const [title, setTitle] = useState(table.title);
