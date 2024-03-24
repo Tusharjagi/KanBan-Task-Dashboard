@@ -1,20 +1,25 @@
-import { TableType } from "@/common/types/TableType";
 import tw from "tailwind-styled-components";
 import { GoProjectRoadmap } from "react-icons/go";
 
-interface IProps {
+import { TableType } from "@/common/types/TableType";
+
+type TableListItemType = {
   table: TableType;
   isActive: boolean;
   onClick: VoidFunction;
-}
+};
 
-export function TableListItem({ table, isActive, onClick }: IProps) {
+export function TableListItem({
+  table,
+  isActive,
+  onClick,
+}: Readonly<TableListItemType>) {
   const { title } = table;
 
   return (
     <Wrapper
       className={
-        isActive ? "bg-indigo-500 text-white" : "bg-transparent text-[#828fa3]"
+        isActive ? "bg-indigo-500 text-white" : "bg-transparent text-montage"
       }
       onClick={onClick}
     >
@@ -41,5 +46,5 @@ last:mb-0
 
 const Icon = tw(GoProjectRoadmap)`
 mr-4
-text-[#828fa3]
+text-montage
 `;
