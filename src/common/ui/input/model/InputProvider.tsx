@@ -5,39 +5,41 @@ import {
   useContext,
   useMemo,
   useState,
-} from 'react'
+} from "react";
 
-interface IContext {
-  inputId?: string
-  setInputId: (value: string | undefined) => void
-}
+type InputContextType = {
+  inputId?: string;
+  setInputId: (value: string | undefined) => void;
+};
 
-const InputContext = createContext<IContext>({
-  inputId: '',
+const InputContext = createContext<InputContextType>({
+  inputId: "",
   setInputId() {},
-})
+});
 
-interface IProviderProps {
-  children?: ReactNode
-}
+type InputProviderType = {
+  children?: ReactNode;
+};
 
-export function InputProvider({ children }: IProviderProps) {
-  const [inputId, setInputId] = useState<string | undefined>()
+export function InputProvider({ children }: Readonly<InputProviderType>) {
+  const [inputId, setInputId] = useState<string | undefined>();
 
   const handleChangeInputId = useCallback(
     (value: string | undefined) => setInputId(value),
-    [setInputId]
-  )
+    [setInputId],
+  );
 
   const value = useMemo(
     () => ({
       inputId,
       setInputId: handleChangeInputId,
     }),
-    [inputId, handleChangeInputId]
-  )
+    [inputId, handleChangeInputId],
+  );
 
-  return <InputContext.Provider value={value}>{children}</InputContext.Provider>
+  return (
+    <InputContext.Provider value={value}>{children}</InputContext.Provider>
+  );
 }
 
-export const useInputContext = () => useContext(InputContext)
+export const useInputContext = () => useContext(InputContext);
