@@ -1,14 +1,13 @@
-import tw from 'tailwind-styled-components'
-import { DetailedHTMLProps, ButtonHTMLAttributes } from 'react'
+import { DetailedHTMLProps, ButtonHTMLAttributes } from "react";
+import tw from "tailwind-styled-components";
 
-interface IProps
-  extends DetailedHTMLProps<
-    ButtonHTMLAttributes<HTMLButtonElement>,
-    HTMLButtonElement
-  > {}
+type MenuListItemType = DetailedHTMLProps<
+  ButtonHTMLAttributes<HTMLButtonElement>,
+  HTMLButtonElement
+>;
 
-export function MenuListItem(props: IProps) {
-  return <Wrapper {...props} />
+export function MenuListItem(props: MenuListItemType) {
+  return <Wrapper {...props} />;
 }
 
 const Wrapper = tw.button`
@@ -22,4 +21,4 @@ dark:text-white
 rounded
 hover:bg-black/10
 dark:hover:bg-white/10
-`
+`;
