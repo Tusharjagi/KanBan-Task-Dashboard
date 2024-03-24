@@ -4,19 +4,19 @@ import { SubtaskItem } from "./SubtaskItem";
 import { useAppDispatch } from "@/common/hooks/useRedux";
 import { mainActions } from "@/common/store/slices/main";
 
-interface IProps {
+type SubtaskListType = {
   tableIndex: number;
   columnIndex: number;
   taskIndex: number;
   subtasks: SubtaskType[];
-}
+};
 
 export function SubtaskList({
   tableIndex,
   columnIndex,
   taskIndex,
   subtasks,
-}: IProps) {
+}: Readonly<SubtaskListType>) {
   const dispatch = useAppDispatch();
 
   const handleToggleSubtask = (subtaskIndex: number) => () => {
