@@ -1,18 +1,19 @@
-import { ThemeSwitch } from '@/common/features/theme/switcher'
-import { Backdrop } from '@/common/ui/backdrop'
-import tw from 'tailwind-styled-components'
-import { Dispatch, SetStateAction } from 'react'
-import { TableList } from '@/common/components/table/list'
+import { Dispatch, SetStateAction } from "react";
+
+import { ThemeSwitch } from "@/common/features/theme/switcher";
+import { Backdrop } from "@/common/ui/backdrop";
+import tw from "tailwind-styled-components";
+import { TableList } from "@/common/components/table/list";
 
 interface IProps {
-  open: boolean
-  setOpen: Dispatch<SetStateAction<boolean>>
+  open: boolean;
+  setOpen: Dispatch<SetStateAction<boolean>>;
 }
 
 export function Menu({ open, setOpen }: IProps) {
   const handleClose = () => {
-    setOpen(false)
-  }
+    setOpen(false);
+  };
 
   return open ? (
     <Wrapper>
@@ -24,7 +25,7 @@ export function Menu({ open, setOpen }: IProps) {
         <ThemeSwitch />
       </List>
     </Wrapper>
-  ) : null
+  ) : null;
 }
 
 const Wrapper = tw.div`
@@ -34,7 +35,7 @@ top-0
 left-0
 w-full
 min-h-screen
-`
+`;
 
 const List = tw.div`
 max-w-md
@@ -44,5 +45,5 @@ mx-auto
 rounded-md
 drop-shadow-md
 py-5
-bg-[#2b2c37]
-`
+bg-gunmetal
+`;
