@@ -1,28 +1,31 @@
-import { Input, InputLabel, InputField } from '@/common/ui/input'
-import { ChangeEvent, Dispatch, SetStateAction, memo } from 'react'
+import { ChangeEvent, Dispatch, SetStateAction, memo } from "react";
 
-interface IProps {
-  title: string
-  setTitle: Dispatch<SetStateAction<string>>
-}
+import { Input, InputLabel, InputField } from "@/common/ui/input";
 
-export const TaskTitleField = memo(({ title, setTitle }: IProps) => {
-  const handleOnChange = (e: ChangeEvent<HTMLInputElement>) => {
-    setTitle(e.target.value)
-  }
+type TaskTitleFieldType = {
+  title: string;
+  setTitle: Dispatch<SetStateAction<string>>;
+};
 
-  return (
-    <Input>
-      <InputLabel>Board name</InputLabel>
-      <InputField
-        id="board-name"
-        type="text"
-        className="mb-5"
-        value={title}
-        onChange={handleOnChange}
-      />
-    </Input>
-  )
-})
+export const TaskTitleField = memo(
+  ({ title, setTitle }: TaskTitleFieldType) => {
+    const handleOnChange = (e: ChangeEvent<HTMLInputElement>) => {
+      setTitle(e.target.value);
+    };
 
-TaskTitleField.displayName = 'TaskTitleField'
+    return (
+      <Input>
+        <InputLabel>Board name</InputLabel>
+        <InputField
+          id="board-name"
+          type="text"
+          className="mb-5"
+          value={title}
+          onChange={handleOnChange}
+        />
+      </Input>
+    );
+  },
+);
+
+TaskTitleField.displayName = "TaskTitleField";
