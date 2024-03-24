@@ -6,7 +6,7 @@ import tw from "tailwind-styled-components";
 import { Button } from "@/common/ui/button";
 import { DEFAULT_COLUMNS_VALUES } from "@/common/data/constants";
 import { mainActions } from "@/common/store/slices/main";
-import { ITableColumn } from "@/common/models/ITableColumn";
+import { TableColumnType } from "@/common/types/TableColumnType";
 import { TableTitleField } from "./ui/TableTitleField";
 import { TableColumns } from "./ui/TableColumns";
 import { v4 as uuid } from "uuid";
@@ -20,7 +20,9 @@ export function CreateTableModal(props: Readonly<IProps>) {
   const ref = useRef<HTMLFormElement>(null);
 
   const [title, setTitle] = useState("");
-  const [columns, setColumns] = useState<ITableColumn[]>(DEFAULT_COLUMNS_VALUES);
+  const [columns, setColumns] = useState<TableColumnType[]>(
+    DEFAULT_COLUMNS_VALUES,
+  );
   const [showError, setShowError] = useState(false);
 
   const dispatch = useAppDispatch();

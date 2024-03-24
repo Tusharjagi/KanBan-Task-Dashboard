@@ -1,25 +1,25 @@
-import { Modal, ModalTitle } from '@/common/ui/modal'
-import tw from 'tailwind-styled-components'
-import { FormEvent, useState } from 'react'
-import { Button } from '@/common/ui/button'
-import { useAppDispatch } from '@/common/hooks/useRedux'
-import { ISubtask } from '@/common/models/ISubtask'
-import { mainActions } from '@/common/store/slices/main'
-import { TaskTitleField } from './ui/TaskTitleField'
-import { TaskDescriptionField } from './ui/TaskDescriptionField'
-import { TaskSubtasks } from './ui/TaskSubtasks'
-import { TaskColumnSelect } from './ui/TaskColumnSelect'
-import { ITask } from '@/common/models/ITask'
-import { ITableColumn } from '@/common/models/ITableColumn'
+import { Modal, ModalTitle } from "@/common/ui/modal";
+import tw from "tailwind-styled-components";
+import { FormEvent, useState } from "react";
+import { Button } from "@/common/ui/button";
+import { useAppDispatch } from "@/common/hooks/useRedux";
+import { SubtaskType } from "@/common/types/SubtaskType";
+import { mainActions } from "@/common/store/slices/main";
+import { TaskTitleField } from "./ui/TaskTitleField";
+import { TaskDescriptionField } from "./ui/TaskDescriptionField";
+import { TaskSubtasks } from "./ui/TaskSubtasks";
+import { TaskColumnSelect } from "./ui/TaskColumnSelect";
+import { TaskType } from "@/common/types/TaskType";
+import { TableColumnType } from "@/common/types/TableColumnType";
 
 interface IProps {
-  open: boolean
-  onClose: VoidFunction
-  tableIndex: number
-  columnIndex: number
-  taskIndex: number
-  task: ITask
-  columns: ITableColumn[]
+  open: boolean;
+  onClose: VoidFunction;
+  tableIndex: number;
+  columnIndex: number;
+  taskIndex: number;
+  task: TaskType;
+  columns: TableColumnType[];
 }
 
 export function EditTaskModal({
@@ -31,17 +31,17 @@ export function EditTaskModal({
   task,
   columns,
 }: IProps) {
-  const modalProps = { open, onClose: handleClose }
+  const modalProps = { open, onClose: handleClose };
 
-  const [title, setTitle] = useState(task.title)
-  const [description, setDescription] = useState(task.description)
-  const [subtasks, setSubtasks] = useState<ISubtask[]>(task.subtasks)
-  const [selectedColumnIndex, setSelectedColumnIndex] = useState(columnIndex)
+  const [title, setTitle] = useState(task.title);
+  const [description, setDescription] = useState(task.description);
+  const [subtasks, setSubtasks] = useState<SubtaskType[]>(task.subtasks);
+  const [selectedColumnIndex, setSelectedColumnIndex] = useState(columnIndex);
 
-  const dispatch = useAppDispatch()
+  const dispatch = useAppDispatch();
 
   const handleOnSubmit = (e: FormEvent<HTMLFormElement>) => {
-    e.preventDefault()
+    e.preventDefault();
 
     dispatch(
       mainActions.updateTask({
@@ -55,11 +55,11 @@ export function EditTaskModal({
           description,
           subtasks,
         },
-      })
-    )
+      }),
+    );
 
-    handleClose()
-  }
+    handleClose();
+  };
 
   return (
     <Modal {...modalProps}>
@@ -82,18 +82,18 @@ export function EditTaskModal({
         </CreateButton>
       </form>
     </Modal>
-  )
+  );
 }
 
 const TasksTitle = tw.h3`
 text-white
 text-sm
 font-bold
-`
+`;
 
 const CreateButton = tw(Button)`
 flex
 items-center
 justify-center
 w-full
-`
+`;

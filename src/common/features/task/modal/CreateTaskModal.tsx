@@ -1,22 +1,22 @@
-import { Modal, ModalTitle } from '@/common/ui/modal'
-import tw from 'tailwind-styled-components'
-import { FormEvent, useState } from 'react'
-import { Button } from '@/common/ui/button'
-import { useAppDispatch } from '@/common/hooks/useRedux'
-import { ISubtask } from '@/common/models/ISubtask'
-import { mainActions } from '@/common/store/slices/main'
-import { ITableColumn } from '@/common/models/ITableColumn'
-import { TaskTitleField } from './ui/TaskTitleField'
-import { TaskDescriptionField } from './ui/TaskDescriptionField'
-import { TaskSubtasks } from './ui/TaskSubtasks'
-import { TaskColumnSelect } from './ui/TaskColumnSelect'
-import { v4 as uuid } from 'uuid'
+import { Modal, ModalTitle } from "@/common/ui/modal";
+import tw from "tailwind-styled-components";
+import { FormEvent, useState } from "react";
+import { Button } from "@/common/ui/button";
+import { useAppDispatch } from "@/common/hooks/useRedux";
+import { SubtaskType } from "@/common/types/SubtaskType";
+import { mainActions } from "@/common/store/slices/main";
+import { TableColumnType } from "@/common/types/TableColumnType";
+import { TaskTitleField } from "./ui/TaskTitleField";
+import { TaskDescriptionField } from "./ui/TaskDescriptionField";
+import { TaskSubtasks } from "./ui/TaskSubtasks";
+import { TaskColumnSelect } from "./ui/TaskColumnSelect";
+import { v4 as uuid } from "uuid";
 
 interface IProps {
-  open: boolean
-  onClose: VoidFunction
-  columns: ITableColumn[]
-  tableIndex: number
+  open: boolean;
+  onClose: VoidFunction;
+  columns: TableColumnType[];
+  tableIndex: number;
 }
 
 export function CreateTaskModal({
@@ -25,17 +25,17 @@ export function CreateTaskModal({
   columns,
   tableIndex,
 }: IProps) {
-  const modalProps = { open, onClose: handleClose }
+  const modalProps = { open, onClose: handleClose };
 
-  const [title, setTitle] = useState('')
-  const [description, setDescription] = useState('')
-  const [subtasks, setSubtasks] = useState<ISubtask[]>([])
-  const [selectedColumnIndex, setSelectedColumnIndex] = useState(0)
+  const [title, setTitle] = useState("");
+  const [description, setDescription] = useState("");
+  const [subtasks, setSubtasks] = useState<SubtaskType[]>([]);
+  const [selectedColumnIndex, setSelectedColumnIndex] = useState(0);
 
-  const dispatch = useAppDispatch()
+  const dispatch = useAppDispatch();
 
   const handleOnSubmit = (e: FormEvent<HTMLFormElement>) => {
-    e.preventDefault()
+    e.preventDefault();
 
     dispatch(
       mainActions.addTask({
@@ -47,11 +47,11 @@ export function CreateTaskModal({
           description,
           subtasks,
         },
-      })
-    )
+      }),
+    );
 
-    handleClose()
-  }
+    handleClose();
+  };
 
   return (
     <Modal {...modalProps}>
@@ -74,18 +74,18 @@ export function CreateTaskModal({
         </CreateButton>
       </form>
     </Modal>
-  )
+  );
 }
 
 const TasksTitle = tw.h3`
 text-white
 text-sm
 font-bold
-`
+`;
 
 const CreateButton = tw(Button)`
 flex
 items-center
 justify-center
 w-full
-`
+`;

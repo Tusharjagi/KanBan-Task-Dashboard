@@ -1,39 +1,42 @@
-import { FieldArray } from '@/common/components/field-array'
-import { ITableColumn } from '@/common/models/ITableColumn'
-import { Dispatch, SetStateAction, memo } from 'react'
-import { v4 as uuid } from 'uuid'
+import { Dispatch, SetStateAction, memo } from "react";
 
-interface IProps {
-  columns: ITableColumn[]
-  setColumns: Dispatch<SetStateAction<ITableColumn[]>>
-}
+import { FieldArray } from "@/common/components/field-array";
+import { TableColumnType } from "@/common/types/TableColumnType";
+import { v4 as uuid } from "uuid";
 
-export const TableColumns = memo(({ columns, setColumns }: IProps) => {
-  const handleAddColumn = (title: string) => {
-    const newColumn = {
-      id: uuid(),
-      title,
-      tasks: [],
-    }
+type TableColumnsProps = {
+  columns: TableColumnType[];
+  setColumns: Dispatch<SetStateAction<TableColumnType[]>>;
+};
 
-    setColumns([...columns, newColumn])
-  }
+export const TableColumns = memo(
+  ({ columns, setColumns }: TableColumnsProps) => {
+    const handleAddColumn = (title: string) => {
+      const newColumn = {
+        id: uuid(),
+        title,
+        tasks: [],
+      };
 
-  const handleRemoveColumn = (index: number) => {
-    const newColumns = columns.filter((_, i) => i !== index)
-    console.log(newColumns)
-    setColumns([...newColumns])
-  }
+      setColumns([...columns, newColumn]);
+    };
 
-  return (
-    <FieldArray
-      values={columns}
-      setValues={setColumns}
-      titleSelector="title"
-      addValue={handleAddColumn}
-      removeValue={handleRemoveColumn}
-    />
-  )
-})
+    const handleRemoveColumn = (index: number) => {
+      const newColumns = columns.filter((_, i) => i !== index);
+      console.log(newColumns);
+      setColumns([...newColumns]);
+    };
 
-TableColumns.displayName = 'TableColumns'
+    return (
+      <FieldArray
+        values={columns}
+        setValues={setColumns}
+        titleSelector="title"
+        addValue={handleAddColumn}
+        removeValue={handleRemoveColumn}
+      />
+    );
+  },
+);
+
+TableColumns.displayName = "TableColumns";

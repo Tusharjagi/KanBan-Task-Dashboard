@@ -1,18 +1,18 @@
-import { ITableColumn } from '@/common/models/ITableColumn'
-import { Dispatch, SetStateAction, memo } from 'react'
-import { Select, SelectOption } from '@/common/ui/select'
+import { TableColumnType } from "@/common/types/TableColumnType";
+import { Dispatch, SetStateAction, memo } from "react";
+import { Select, SelectOption } from "@/common/ui/select";
 
 interface IProps {
-  columns: ITableColumn[]
-  selectedIndex: number
-  setSelectedIndex: Dispatch<SetStateAction<number>>
+  columns: TableColumnType[];
+  selectedIndex: number;
+  setSelectedIndex: Dispatch<SetStateAction<number>>;
 }
 
 export const TaskColumnSelect = memo(
   ({ columns, selectedIndex, setSelectedIndex }: IProps) => {
     const handleOnChange = (value: number) => {
-      setSelectedIndex(value)
-    }
+      setSelectedIndex(value);
+    };
 
     return (
       <Select value={selectedIndex} onChange={handleOnChange}>
@@ -22,8 +22,8 @@ export const TaskColumnSelect = memo(
           </SelectOption>
         ))}
       </Select>
-    )
-  }
-)
+    );
+  },
+);
 
-TaskColumnSelect.displayName = 'TaskColumnSelect'
+TaskColumnSelect.displayName = "TaskColumnSelect";

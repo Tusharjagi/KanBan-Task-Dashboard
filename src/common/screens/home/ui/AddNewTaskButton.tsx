@@ -4,12 +4,12 @@ import { AiOutlinePlus } from "react-icons/ai";
 import { CreateTaskModal } from "@/common/features/task";
 import { useMediaQuery } from "@/common/hooks/useMediaQuery";
 import { useToggler } from "@/common/hooks/useToggler";
-import { ITable } from "@/common/models/ITable";
+import { TableType } from "@/common/types/TableType";
 import { Button } from "@/common/ui/button";
 import { bool2string } from "@/common/utils";
 
 interface IProps {
-  table: ITable;
+  table: TableType;
   tableIndex: number;
 }
 
@@ -30,7 +30,9 @@ export function AddNewTaskButton({ table, tableIndex }: Readonly<IProps>) {
 
   return (
     <>
-      <Button onClick={toggleOpen}>{content[bool2string(isDesktop && mounted)]}</Button>
+      <Button onClick={toggleOpen}>
+        {content[bool2string(isDesktop && mounted)]}
+      </Button>
       {open ? (
         <CreateTaskModal
           open={open}

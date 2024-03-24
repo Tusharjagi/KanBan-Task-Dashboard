@@ -5,15 +5,15 @@ import { Modal, ModalTitle } from "@/common/ui/modal";
 import { Button } from "@/common/ui/button";
 import { useAppDispatch } from "@/common/hooks/useRedux";
 import { mainActions } from "@/common/store/slices/main";
-import { ITableColumn } from "@/common/models/ITableColumn";
+import { TableColumnType } from "@/common/types/TableColumnType";
 import { TableTitleField } from "./ui/TableTitleField";
 import { TableColumns } from "./ui/TableColumns";
-import { ITable } from "@/common/models/ITable";
+import { TableType } from "@/common/types/TableType";
 
 interface IProps {
   open: boolean;
   onClose: VoidFunction;
-  table: ITable;
+  table: TableType;
   tableIndex: number;
 }
 
@@ -26,7 +26,7 @@ export function EditTableModal({
   const modalProps = { open, onClose: handleClose };
 
   const [title, setTitle] = useState(table.title);
-  const [columns, setColumns] = useState<ITableColumn[]>(table.columns);
+  const [columns, setColumns] = useState<TableColumnType[]>(table.columns);
   const [showError, setShowError] = useState(false);
 
   const dispatch = useAppDispatch();

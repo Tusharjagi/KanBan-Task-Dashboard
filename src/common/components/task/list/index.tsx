@@ -1,12 +1,12 @@
-import { ITableColumn } from '@/common/models/ITableColumn'
-import tw from 'tailwind-styled-components'
-import { Column } from './Column'
-import { RefObject } from 'react'
+import { TableColumnType } from "@/common/types/TableColumnType";
+import tw from "tailwind-styled-components";
+import { Column } from "./Column";
+import { RefObject } from "react";
 
 interface IProps {
-  listRef: RefObject<HTMLDivElement>
-  columns: ITableColumn[]
-  tableIndex: number
+  listRef: RefObject<HTMLDivElement>;
+  columns: TableColumnType[];
+  tableIndex: number;
 }
 
 export function TaskList({ listRef, columns, tableIndex }: IProps) {
@@ -22,7 +22,7 @@ export function TaskList({ listRef, columns, tableIndex }: IProps) {
         />
       ))}
     </Wrapper>
-  )
+  );
 }
 
 const Wrapper = tw.div`
@@ -30,4 +30,4 @@ flex
 flex-nowrap
 space-x-5
 transition-transform
-`
+`;

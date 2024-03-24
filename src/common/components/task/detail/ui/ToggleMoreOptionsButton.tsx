@@ -1,19 +1,19 @@
-import { Button } from '@/common/ui/button'
-import { MenuList, MenuListItem } from '@/common/ui/menu-list'
-import { useState } from 'react'
-import { BiEdit } from 'react-icons/bi'
-import { RiDeleteBin5Line } from 'react-icons/ri'
-import { CiSquareMore } from 'react-icons/ci'
-import { ITableColumn } from '@/common/models/ITableColumn'
-import { ITask } from '@/common/models/ITask'
-import { EditTaskModal, DeleteTaskModal } from '@/common/features/task'
+import { Button } from "@/common/ui/button";
+import { MenuList, MenuListItem } from "@/common/ui/menu-list";
+import { useState } from "react";
+import { BiEdit } from "react-icons/bi";
+import { RiDeleteBin5Line } from "react-icons/ri";
+import { CiSquareMore } from "react-icons/ci";
+import { TableColumnType } from "@/common/types/TableColumnType";
+import { TaskType } from "@/common/types/TaskType";
+import { EditTaskModal, DeleteTaskModal } from "@/common/features/task";
 
 interface IProps {
-  tableIndex: number
-  columnIndex: number
-  taskIndex: number
-  task: ITask
-  columns: ITableColumn[]
+  tableIndex: number;
+  columnIndex: number;
+  taskIndex: number;
+  task: TaskType;
+  columns: TableColumnType[];
 }
 
 export function ToggleMoreOptionsButton({
@@ -23,33 +23,33 @@ export function ToggleMoreOptionsButton({
   task,
   columns,
 }: IProps) {
-  const [anchorEl, setAnchorEl] = useState<HTMLButtonElement | null>(null)
-  const [openEditModal, setOpenEditModal] = useState(false)
-  const [openDeleteDialog, setOpenDeleteDialog] = useState(false)
+  const [anchorEl, setAnchorEl] = useState<HTMLButtonElement | null>(null);
+  const [openEditModal, setOpenEditModal] = useState(false);
+  const [openDeleteDialog, setOpenDeleteDialog] = useState(false);
 
-  const open = Boolean(anchorEl)
+  const open = Boolean(anchorEl);
 
   const handleClose = () => {
-    setAnchorEl(null)
-  }
+    setAnchorEl(null);
+  };
 
   const handleCloseEditModal = () => {
-    setOpenEditModal(false)
-  }
+    setOpenEditModal(false);
+  };
 
   const handleCloseDeleteDialog = () => {
-    setOpenDeleteDialog(false)
-  }
+    setOpenDeleteDialog(false);
+  };
 
   const handleOpenDeleteDialog = () => {
-    setOpenDeleteDialog(true)
-    handleClose()
-  }
+    setOpenDeleteDialog(true);
+    handleClose();
+  };
 
   const handleOpeEditModal = () => {
-    setOpenEditModal(true)
-    handleClose()
-  }
+    setOpenEditModal(true);
+    handleClose();
+  };
 
   return (
     <>
@@ -93,5 +93,5 @@ export function ToggleMoreOptionsButton({
         />
       ) : null}
     </>
-  )
+  );
 }

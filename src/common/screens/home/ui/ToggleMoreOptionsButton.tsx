@@ -6,14 +6,17 @@ import { RiDeleteBin5Line } from "react-icons/ri";
 import { Button } from "@/common/ui/button";
 import { MenuList, MenuListItem } from "@/common/ui/menu-list";
 import { EditTableModal, DeleteTableModal } from "@/common/features/table";
-import { ITable } from "@/common/models/ITable";
+import { TableType } from "@/common/types/TableType";
 
 interface IProps {
-  table: ITable;
+  table: TableType;
   tableIndex: number;
 }
 
-export function ToggleMoreOptionsButton({ table, tableIndex }: Readonly<IProps>) {
+export function ToggleMoreOptionsButton({
+  table,
+  tableIndex,
+}: Readonly<IProps>) {
   const [anchorEl, setAnchorEl] = useState<HTMLButtonElement | null>(null);
   const [openEditModal, setOpenEditModal] = useState(false);
   const [openDeleteDialog, setOpenDeleteDialog] = useState(false);

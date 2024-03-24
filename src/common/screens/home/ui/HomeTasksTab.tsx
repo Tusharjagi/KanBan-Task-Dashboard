@@ -1,22 +1,22 @@
-import { TaskList } from '@/common/components/task/list'
-import { ITable } from '@/common/models/ITable'
+import { TaskList } from "@/common/components/task/list";
+import { TableType } from "@/common/types/TableType";
 import {
   Header,
   LayoutContent,
   HeaderTitleNoSSR,
-} from '@/common/components/layout'
-import { AddNewTaskButton } from './AddNewTaskButton'
-import { ToggleMoreOptionsButton } from './ToggleMoreOptionsButton'
-import { useRef } from 'react'
-import { ListScroll } from './ListScroll'
+} from "@/common/components/layout";
+import { AddNewTaskButton } from "./AddNewTaskButton";
+import { ToggleMoreOptionsButton } from "./ToggleMoreOptionsButton";
+import { useRef } from "react";
+import { ListScroll } from "./ListScroll";
 
 interface IProps {
-  table: ITable
-  tableIndex: number
+  table: TableType;
+  tableIndex: number;
 }
 
 export function HomeTasksTab({ table, tableIndex }: IProps) {
-  const listRef = useRef<HTMLDivElement>(null)
+  const listRef = useRef<HTMLDivElement>(null);
 
   return (
     <LayoutContent className="max-w-[100vw]">
@@ -38,5 +38,5 @@ export function HomeTasksTab({ table, tableIndex }: IProps) {
         </div>
       </div>
     </LayoutContent>
-  )
+  );
 }

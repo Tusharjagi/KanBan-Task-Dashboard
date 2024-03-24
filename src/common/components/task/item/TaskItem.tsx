@@ -1,16 +1,16 @@
-import { ITask } from '@/common/models/ITask'
-import tw from 'tailwind-styled-components'
-import { DetailTaskModal } from '../detail'
-import { ITableColumn } from '@/common/models/ITableColumn'
-import { useMemo, useState, DragEvent } from 'react'
-import { DRAG_TRANSFER_KEY } from '@/common/data/constants'
+import { TaskType } from "@/common/types/TaskType";
+import tw from "tailwind-styled-components";
+import { DetailTaskModal } from "../detail";
+import { TableColumnType } from "@/common/types/TableColumnType";
+import { useMemo, useState, DragEvent } from "react";
+import { DRAG_TRANSFER_KEY } from "@/common/data/constants";
 
 interface IProps {
-  tableIndex: number
-  columnIndex: number
-  taskIndex: number
-  task: ITask
-  columns: ITableColumn[]
+  tableIndex: number;
+  columnIndex: number;
+  taskIndex: number;
+  task: TaskType;
+  columns: TableColumnType[];
 }
 
 export function TaskItem({
@@ -20,31 +20,31 @@ export function TaskItem({
   task,
   columns,
 }: IProps) {
-  const [open, setOpen] = useState(false)
+  const [open, setOpen] = useState(false);
 
-  const subtasksLength = task.subtasks.length
+  const subtasksLength = task.subtasks.length;
   const subtaskCompletedLength = useMemo(
     () => task.subtasks.filter((x) => x.doing).length,
-    [task.subtasks]
-  )
+    [task.subtasks],
+  );
 
-  const subtitle = `${subtaskCompletedLength} of ${subtasksLength} subtasks`
+  const subtitle = `${subtaskCompletedLength} of ${subtasksLength} subtasks`;
 
   const handleOnClose = () => {
-    setOpen(false)
-  }
+    setOpen(false);
+  };
 
   const handleOnOpen = () => {
-    setOpen(true)
-  }
+    setOpen(true);
+  };
 
   const handleOnDragStart = (e: DragEvent<HTMLDivElement>) => {
     const text = JSON.stringify({
       taskIndex,
       columnIndex,
-    })
-    e.dataTransfer.setData(DRAG_TRANSFER_KEY, text)
-  }
+    });
+    e.dataTransfer.setData(DRAG_TRANSFER_KEY, text);
+  };
 
   return (
     <>
@@ -66,7 +66,7 @@ export function TaskItem({
         columns={columns}
       />
     </>
-  )
+  );
 }
 
 const Wrapper = tw.div`
@@ -76,7 +76,7 @@ p-5
 rounded-md
 cursor-pointer
 drop-shadow-md
-`
+`;
 
 const Title = tw.h3`
 text-base
@@ -84,9 +84,9 @@ text-gray-800
 dark:text-white
 font-bold
 mb-2
-`
+`;
 
 const Subtitle = tw.span`
 text-[#828fa3]
 text-sm
-`
+`;

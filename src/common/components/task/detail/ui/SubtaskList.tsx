@@ -1,14 +1,14 @@
-import { ISubtask } from '@/common/models/ISubtask'
-import tw from 'tailwind-styled-components'
-import { SubtaskItem } from './SubtaskItem'
-import { useAppDispatch } from '@/common/hooks/useRedux'
-import { mainActions } from '@/common/store/slices/main'
+import { SubtaskType } from "@/common/types/SubtaskType";
+import tw from "tailwind-styled-components";
+import { SubtaskItem } from "./SubtaskItem";
+import { useAppDispatch } from "@/common/hooks/useRedux";
+import { mainActions } from "@/common/store/slices/main";
 
 interface IProps {
-  tableIndex: number
-  columnIndex: number
-  taskIndex: number
-  subtasks: ISubtask[]
+  tableIndex: number;
+  columnIndex: number;
+  taskIndex: number;
+  subtasks: SubtaskType[];
 }
 
 export function SubtaskList({
@@ -17,7 +17,7 @@ export function SubtaskList({
   taskIndex,
   subtasks,
 }: IProps) {
-  const dispatch = useAppDispatch()
+  const dispatch = useAppDispatch();
 
   const handleToggleSubtask = (subtaskIndex: number) => () => {
     dispatch(
@@ -26,9 +26,9 @@ export function SubtaskList({
         columnIndex,
         taskIndex,
         subtaskIndex,
-      })
-    )
-  }
+      }),
+    );
+  };
   return (
     <Wrapper>
       {subtasks.map((e, index) => (
@@ -39,11 +39,11 @@ export function SubtaskList({
         />
       ))}
     </Wrapper>
-  )
+  );
 }
 
 const Wrapper = tw.ul`
 list-none
 space-y-2
 mb-7
-`
+`;
