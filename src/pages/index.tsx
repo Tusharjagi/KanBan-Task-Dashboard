@@ -1,4 +1,5 @@
 import Head from "next/head";
+
 import { HomeScreen } from "@/common/screens/home";
 
 export default function Home() {
