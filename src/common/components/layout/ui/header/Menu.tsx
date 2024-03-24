@@ -1,16 +1,16 @@
 import { Dispatch, SetStateAction } from "react";
+import tw from "tailwind-styled-components";
 
 import { ThemeSwitch } from "@/common/features/theme/switcher";
 import { Backdrop } from "@/common/ui/backdrop";
-import tw from "tailwind-styled-components";
 import { TableList } from "@/common/components/table/list";
 
-interface IProps {
+type MenuType = {
   open: boolean;
   setOpen: Dispatch<SetStateAction<boolean>>;
-}
+};
 
-export function Menu({ open, setOpen }: IProps) {
+export function Menu({ open, setOpen }: MenuType) {
   const handleClose = () => {
     setOpen(false);
   };
