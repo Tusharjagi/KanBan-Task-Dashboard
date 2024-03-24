@@ -1,4 +1,3 @@
-import { useToggler } from "@/common/hooks/useToggler";
 import {
   ReactNode,
   createContext,
@@ -8,33 +7,35 @@ import {
   useState,
 } from "react";
 
-interface IContext {
+import { useToggler } from "@/common/hooks/useToggler";
+
+type createContextType = {
   value?: any;
   changeValue: (value?: any, node?: ReactNode) => void;
   expanded: boolean;
   toggle: VoidFunction;
   changeExpanded: (value: boolean) => void;
   viewNode?: ReactNode;
-}
+};
 
-const SelectContext = createContext<IContext>({
+const SelectContext = createContext<createContextType>({
   expanded: false,
   changeValue() {},
   toggle() {},
   changeExpanded() {},
 });
 
-interface IProps {
+type SelectProviderType = {
   value: any;
   onChange: (value: any) => void;
   children: ReactNode;
-}
+};
 
 export function SelectProvider({
   value,
   onChange,
   children,
-}: Readonly<IProps>) {
+}: Readonly<SelectProviderType>) {
   const [expanded, toggle, changeExpanded] = useToggler(false);
   const [viewNode, setViewNode] = useState<ReactNode | undefined>();
 
@@ -46,7 +47,7 @@ export function SelectProvider({
     [onChange],
   );
 
-  const providerValue = useMemo<IContext>(
+  const providerValue = useMemo<createContextType>(
     () => ({
       value,
       changeValue: handleChangeValue,
