@@ -1,25 +1,26 @@
-import tw from 'tailwind-styled-components'
-import { ThemeSwitch } from '@/common/features/theme/switcher'
-import { HideSidebarButton } from './HideButton'
-import { bool2string, string2bool } from '@/common/utils'
-import { useEffect, useState } from 'react'
-import { TableList } from '@/common/components/table/list'
-import { Logo } from './Logo'
+import { useEffect, useState } from "react";
+import tw from "tailwind-styled-components";
+
+import { ThemeSwitch } from "@/common/features/theme/switcher";
+import { HideSidebarButton } from "./HideButton";
+import { bool2string, string2bool } from "@/common/utils";
+import { TableList } from "@/common/components/table/list";
+import { Logo } from "./Logo";
 
 interface IProps {
-  expanded: boolean
-  isDesktop: boolean
+  expanded: boolean;
+  isDesktop: boolean;
 }
 
-export function Sidebar({ expanded, isDesktop }: IProps) {
-  const [mounted, setMounted] = useState(false)
+export function Sidebar({ expanded, isDesktop }: Readonly<IProps>) {
+  const [mounted, setMounted] = useState(false);
 
   useEffect(() => {
-    setMounted(true)
-  }, [])
+    setMounted(true);
+  }, []);
 
   if (mounted && !isDesktop) {
-    return null
+    return null;
   }
 
   return (
@@ -37,7 +38,7 @@ export function Sidebar({ expanded, isDesktop }: IProps) {
       </SideBarWrapper>
       <HideSidebarButton />
     </>
-  )
+  );
 }
 
 const SideBarWrapper = tw.div`
@@ -46,10 +47,10 @@ top-0
 left-0
 min-h-screen
 w-64
-`
+`;
 
 interface IWrapperProps {
-  $expanded: 'true' | 'false'
+  $expanded: "true" | "false";
 }
 
 const Wrapper = tw.aside<IWrapperProps>`
@@ -59,12 +60,12 @@ flex
 flex-col
 justify-between
 bg-white
-dark:bg-[#2b2c37]
+dark:bg-gunmetal
 w-full
 min-h-screen
 border-r-[1px]
 border-r-gray-600
 transition-none
 md:transition-all
-${({ $expanded }) => (string2bool($expanded) ? 'left-0' : '-left-[100%]')}
-`
+${({ $expanded }) => (string2bool($expanded) ? "left-0" : "-left-[100%]")}
+`;
