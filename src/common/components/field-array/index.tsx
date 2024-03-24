@@ -1,7 +1,8 @@
-import { Button } from "@/common/ui/button";
-import { Input, InputField } from "@/common/ui/input";
 import { useState, Dispatch, SetStateAction, ChangeEvent } from "react";
 import { AiOutlineCloseSquare, AiOutlinePlusSquare } from "react-icons/ai";
+
+import { Button } from "@/common/ui/button";
+import { Input, InputField } from "@/common/ui/input";
 import tw from "tailwind-styled-components";
 
 interface IItem {
@@ -23,7 +24,7 @@ export function FieldArray<T extends IItem, K extends keyof T>({
   titleSelector,
   addValue,
   removeValue,
-}: IProps<T, K>) {
+}: Readonly<IProps<T, K>>) {
   const handleOnChange = (index: number) => (e: ChangeEvent<HTMLInputElement>) => {
     const newValues = [...values];
     newValues[index] = {
@@ -40,16 +41,16 @@ export function FieldArray<T extends IItem, K extends keyof T>({
 
   return (
     <Wrapper>
-      {values.map((e, i) => (
-        <div key={e.id} className="flex">
+      {values.map((item, index) => (
+        <div key={item.id} className="flex">
           <Input>
-            <InputField value={e.title} onChange={handleOnChange(i)} />
+            <InputField value={item.title} onChange={handleOnChange(index)} />
           </Input>
           <ActionButton
             type="button"
             button_type="none"
             corner_type="rounded"
-            onClick={handleRemoveItem(i)}
+            onClick={handleRemoveItem(index)}
           >
             <AiOutlineCloseSquare className="text-indigo-500 text-xl" />
           </ActionButton>
@@ -63,8 +64,8 @@ export function FieldArray<T extends IItem, K extends keyof T>({
 const AddColumnField = ({ addColumn }: { addColumn: (value: string) => void }) => {
   const [title, setTitle] = useState("");
 
-  const handleOnChange = (e: ChangeEvent<HTMLInputElement>) => {
-    setTitle(e.target.value);
+  const handleOnChange = (event: ChangeEvent<HTMLInputElement>) => {
+    setTitle(event.target.value);
   };
 
   const handleAddItem = () => {
@@ -98,6 +99,6 @@ bg-black/10
 hover:bg-black/20
 dark:bg-white/10
 dark:hover:bg-opacity-20
-w-[34px]
-h-[34px]
+w-34
+h-34
 `;
