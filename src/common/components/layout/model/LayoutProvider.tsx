@@ -5,48 +5,48 @@ import {
   useMemo,
   useState,
   useContext,
-} from 'react'
+} from "react";
 
 interface IContext {
-  expanded: boolean
-  changeExpanded: (value: boolean) => void
-  toggleExpanded: VoidFunction
+  expanded: boolean;
+  changeExpanded: (value: boolean) => void;
+  toggleExpanded: VoidFunction;
 }
 
 const LayoutContext = createContext<IContext>({
   expanded: true,
   changeExpanded(value) {},
-  toggleExpanded(){}
-})
+  toggleExpanded() {},
+});
 
 interface IProviderProps {
-  children?: ReactNode
+  children?: ReactNode;
 }
 
-export function LayoutProvider({ children }: IProviderProps) {
-  const [expanded, setExpanded] = useState(true)
+export function LayoutProvider({ children }: Readonly<IProviderProps>) {
+  const [expanded, setExpanded] = useState(true);
 
   const handleChangeExpanded = useCallback(
     (value: boolean) => setExpanded(value),
-    [setExpanded]
-  )
+    [setExpanded],
+  );
 
   const handleToggleExpanded = useCallback(() => {
-    setExpanded(prev => !prev)
-  }, [])
+    setExpanded((prev) => !prev);
+  }, []);
 
   const value = useMemo<IContext>(
     () => ({
       expanded,
       changeExpanded: handleChangeExpanded,
-      toggleExpanded: handleToggleExpanded
+      toggleExpanded: handleToggleExpanded,
     }),
-    [expanded, handleChangeExpanded, handleToggleExpanded]
-  )
+    [expanded, handleChangeExpanded, handleToggleExpanded],
+  );
 
   return (
     <LayoutContext.Provider value={value}>{children}</LayoutContext.Provider>
-  )
+  );
 }
 
-export const useLayoutContext = () => useContext(LayoutContext)
+export const useLayoutContext = () => useContext(LayoutContext);
