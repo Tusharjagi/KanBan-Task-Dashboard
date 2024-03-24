@@ -1,15 +1,20 @@
-import { TableColumnType } from "@/common/types/TableColumnType";
-import tw from "tailwind-styled-components";
-import { Column } from "./Column";
 import { RefObject } from "react";
+import tw from "tailwind-styled-components";
 
-interface IProps {
+import { TableColumnType } from "@/common/types/TableColumnType";
+import { Column } from "./Column";
+
+type TaskListType = {
   listRef: RefObject<HTMLDivElement>;
   columns: TableColumnType[];
   tableIndex: number;
-}
+};
 
-export function TaskList({ listRef, columns, tableIndex }: IProps) {
+export function TaskList({
+  listRef,
+  columns,
+  tableIndex,
+}: Readonly<TaskListType>) {
   return (
     <Wrapper ref={listRef}>
       {columns.map((column, columnIndex) => (
