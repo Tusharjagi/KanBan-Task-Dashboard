@@ -7,23 +7,23 @@ import {
   useContext,
 } from "react";
 
-interface IContext {
+type createContextType = {
   expanded: boolean;
   changeExpanded: (value: boolean) => void;
   toggleExpanded: VoidFunction;
-}
+};
 
-const LayoutContext = createContext<IContext>({
+const LayoutContext = createContext<createContextType>({
   expanded: true,
   changeExpanded(value) {},
   toggleExpanded() {},
 });
 
-interface IProviderProps {
+type LayoutProviderType = {
   children?: ReactNode;
-}
+};
 
-export function LayoutProvider({ children }: Readonly<IProviderProps>) {
+export function LayoutProvider({ children }: Readonly<LayoutProviderType>) {
   const [expanded, setExpanded] = useState(true);
 
   const handleChangeExpanded = useCallback(
@@ -35,7 +35,7 @@ export function LayoutProvider({ children }: Readonly<IProviderProps>) {
     setExpanded((prev) => !prev);
   }, []);
 
-  const value = useMemo<IContext>(
+  const value = useMemo<createContextType>(
     () => ({
       expanded,
       changeExpanded: handleChangeExpanded,
