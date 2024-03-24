@@ -26,6 +26,9 @@ module.exports = {
       margin: {
         256: "16rem",
       },
+      flexBasis: {
+        280: "17.5rem",
+      },
     },
   },
   plugins: [],
