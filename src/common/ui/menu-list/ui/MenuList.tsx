@@ -1,27 +1,21 @@
-import { useScrollLock } from '@/common/hooks/useScrollLock'
-import { getElementCoordinate } from '@/common/utils'
-import {
-  useEffect,
-  useRef,
-  useState,
-  DetailedHTMLProps,
-  HTMLAttributes,
-} from 'react'
-import tw from 'tailwind-styled-components'
-import { Portal } from '@/common/ui/portal'
-import { Backdrop } from '../../backdrop'
+import { useEffect, useState, DetailedHTMLProps, HTMLAttributes } from "react";
+import tw from "tailwind-styled-components";
 
-interface IProps
-  extends Omit<
-    DetailedHTMLProps<HTMLAttributes<HTMLDivElement>, HTMLDivElement>,
-    'style'
-  > {
-  anchorEl: HTMLElement | null
-  open: boolean
-  onClose: VoidFunction
-}
+import { useScrollLock } from "@/common/hooks/useScrollLock";
+import { getElementCoordinate } from "@/common/utils";
+import { Portal } from "@/common/ui/portal";
+import { Backdrop } from "../../backdrop";
 
-const SPACING = 8
+type MenuListType = Omit<
+  DetailedHTMLProps<HTMLAttributes<HTMLDivElement>, HTMLDivElement>,
+  "style"
+> & {
+  anchorEl: HTMLElement | null;
+  open: boolean;
+  onClose: () => void;
+};
+
+const SPACING = 8;
 
 const getElementAlignment = (listEl: HTMLElement, anchorEl: HTMLElement) => {
   const {
@@ -29,27 +23,27 @@ const getElementAlignment = (listEl: HTMLElement, anchorEl: HTMLElement) => {
     left: al,
     bottom: ab,
     right: ar,
-  } = getElementCoordinate(anchorEl)
+  } = getElementCoordinate(anchorEl);
 
-  const { innerWidth: sx, innerHeight: sy } = window
-  const { clientHeight: ly, clientWidth: lx } = listEl
+  const { innerWidth: sx, innerHeight: sy } = window;
+  const { clientHeight: ly, clientWidth: lx } = listEl;
 
-  let position = { x: 0, y: 0 }
+  let position = { x: 0, y: 0 };
 
   if (ab + SPACING + ly < sy - SPACING) {
-    position.y = ab + SPACING
+    position.y = ab + SPACING;
   } else {
-    position.y = at + SPACING + ly
+    position.y = at + SPACING + ly;
   }
 
   if (ar + lx < sx / 2) {
-    position.x = al
+    position.x = al;
   } else {
-    position.x = ar - lx
+    position.x = ar - lx;
   }
 
-  return position
-}
+  return position;
+};
 
 export function MenuList({
   children,
@@ -57,46 +51,43 @@ export function MenuList({
   open,
   onClose,
   ...rest
-}: IProps) {
-  const [listRef, setListRef] = useState<HTMLDivElement | null>(null)
-  const [position, setPosition] = useState({ x: 0, y: 0 })
-  const [isLocked, changeScrollState] = useScrollLock()
+}: MenuListType) {
+  const [listRef, setListRef] = useState<HTMLDivElement | null>(null);
+  const [position, setPosition] = useState({ x: 0, y: 0 });
+  const [isLocked, changeScrollState] = useScrollLock();
 
   useEffect(() => {
-    //changeScrollState(open)
-    //return () => changeScrollState(false)
-  }, [open])
-
-  useEffect(() => {
-    const hasListRef = Boolean(listRef)
+    const hasListRef = Boolean(listRef);
 
     if (hasListRef && !open) {
-      changeScrollState(false)
+      changeScrollState(false);
     }
-  }, [open, listRef])
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [open, listRef]);
 
   useEffect(() => {
-    const listNode = listRef
+    const listNode = listRef;
 
     if (!listNode || !open || !anchorEl) {
-      return
+      return;
     }
 
     if (!isLocked) {
-      changeScrollState(true)
+      changeScrollState(true);
     }
 
-    setPosition(getElementAlignment(listNode, anchorEl))
-  }, [listRef, open, anchorEl, isLocked])
+    setPosition(getElementAlignment(listNode, anchorEl));
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [listRef, open, anchorEl, isLocked]);
 
-  const { x, y } = position
+  const { x, y } = position;
 
   return open ? (
     <Portal>
       <Wrapper onClose={onClose}>
         <MenuListComponent
           ref={(e) => {
-            setListRef(e)
+            setListRef(e);
           }}
           style={{
             top: `${y}px`,
@@ -108,12 +99,12 @@ export function MenuList({
         </MenuListComponent>
       </Wrapper>
     </Portal>
-  ) : null
+  ) : null;
 }
 
 const Wrapper = tw(Backdrop)`
 z-50
-`
+`;
 const MenuListComponent = tw.div`
 fixed
 p-1
@@ -122,4 +113,4 @@ drop-shadow-md
 bg-[#f4f7fd]
 dark:bg-[#20212c]
 space-y-2
-`
+`;
