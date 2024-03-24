@@ -1,45 +1,46 @@
-import { Button } from '@/common/ui/button'
-import { MenuList, MenuListItem } from '@/common/ui/menu-list'
-import { useState } from 'react'
-import { BiEdit } from 'react-icons/bi'
-import { RiDeleteBin5Line } from 'react-icons/ri'
-import { CiSquareMore } from 'react-icons/ci'
-import { EditTableModal, DeleteTableModal } from '@/common/features/table'
-import { ITable } from '@/common/models/ITable'
+import { useState } from "react";
+import { CiSquareMore } from "react-icons/ci";
+import { BiEdit } from "react-icons/bi";
+import { RiDeleteBin5Line } from "react-icons/ri";
+
+import { Button } from "@/common/ui/button";
+import { MenuList, MenuListItem } from "@/common/ui/menu-list";
+import { EditTableModal, DeleteTableModal } from "@/common/features/table";
+import { ITable } from "@/common/models/ITable";
 
 interface IProps {
-  table: ITable
-  tableIndex: number
+  table: ITable;
+  tableIndex: number;
 }
 
-export function ToggleMoreOptionsButton({ table, tableIndex }: IProps) {
-  const [anchorEl, setAnchorEl] = useState<HTMLButtonElement | null>(null)
-  const [openEditModal, setOpenEditModal] = useState(false)
-  const [openDeleteDialog, setOpenDeleteDialog] = useState(false)
+export function ToggleMoreOptionsButton({ table, tableIndex }: Readonly<IProps>) {
+  const [anchorEl, setAnchorEl] = useState<HTMLButtonElement | null>(null);
+  const [openEditModal, setOpenEditModal] = useState(false);
+  const [openDeleteDialog, setOpenDeleteDialog] = useState(false);
 
-  const open = Boolean(anchorEl)
+  const open = Boolean(anchorEl);
 
   const handleClose = () => {
-    setAnchorEl(null)
-  }
+    setAnchorEl(null);
+  };
 
   const handleCloseEditModal = () => {
-    setOpenEditModal(false)
-  }
+    setOpenEditModal(false);
+  };
 
   const handleCloseDeleteDialog = () => {
-    setOpenDeleteDialog(false)
-  }
+    setOpenDeleteDialog(false);
+  };
 
   const handleOpenDeleteDialog = () => {
-    setOpenDeleteDialog(true)
-    handleClose()
-  }
+    setOpenDeleteDialog(true);
+    handleClose();
+  };
 
   const handleOpeEditModal = () => {
-    setOpenEditModal(true)
-    handleClose()
-  }
+    setOpenEditModal(true);
+    handleClose();
+  };
 
   return (
     <>
@@ -77,5 +78,5 @@ export function ToggleMoreOptionsButton({ table, tableIndex }: IProps) {
         />
       ) : null}
     </>
-  )
+  );
 }
