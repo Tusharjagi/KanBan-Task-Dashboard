@@ -1,16 +1,17 @@
+import { createSlice, PayloadAction } from "@reduxjs/toolkit";
+
+import tableDataBase from "@/common/data/data.json";
 import { TableType } from "@/common/types/TableType";
 import { TableColumnType } from "@/common/types/TableColumnType";
 import { TaskType } from "@/common/types/TaskType";
 import { generateUniqueId, removeItemFromArray } from "@/common/utils";
-import { createSlice, PayloadAction } from "@reduxjs/toolkit";
-import tableDataBase from "@/common/data/data.json";
 
-interface IState {
+type createSliceType = {
   tables: TableType[];
   selectedTableIndex?: number;
-}
+};
 
-const initialState: IState = {
+const initialState: createSliceType = {
   tables: tableDataBase,
 };
 
