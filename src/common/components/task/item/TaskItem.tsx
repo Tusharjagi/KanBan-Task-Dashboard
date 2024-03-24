@@ -1,17 +1,18 @@
-import { TaskType } from "@/common/types/TaskType";
+import { useMemo, useState, DragEvent } from "react";
 import tw from "tailwind-styled-components";
+
+import { TaskType } from "@/common/types/TaskType";
 import { DetailTaskModal } from "../detail";
 import { TableColumnType } from "@/common/types/TableColumnType";
-import { useMemo, useState, DragEvent } from "react";
 import { DRAG_TRANSFER_KEY } from "@/common/data/constants";
 
-interface IProps {
+type TaskItemType = {
   tableIndex: number;
   columnIndex: number;
   taskIndex: number;
   task: TaskType;
   columns: TableColumnType[];
-}
+};
 
 export function TaskItem({
   tableIndex,
@@ -19,7 +20,7 @@ export function TaskItem({
   taskIndex,
   task,
   columns,
-}: IProps) {
+}: Readonly<TaskItemType>) {
   const [open, setOpen] = useState(false);
 
   const subtasksLength = task.subtasks.length;
@@ -38,12 +39,12 @@ export function TaskItem({
     setOpen(true);
   };
 
-  const handleOnDragStart = (e: DragEvent<HTMLDivElement>) => {
+  const handleOnDragStart = (event: DragEvent<HTMLDivElement>) => {
     const text = JSON.stringify({
       taskIndex,
       columnIndex,
     });
-    e.dataTransfer.setData(DRAG_TRANSFER_KEY, text);
+    event.dataTransfer.setData(DRAG_TRANSFER_KEY, text);
   };
 
   return (
@@ -71,7 +72,7 @@ export function TaskItem({
 
 const Wrapper = tw.div`
 bg-white
-dark:bg-[#2b2c37]
+dark:bg-gunmetal
 p-5
 rounded-md
 cursor-pointer
@@ -87,6 +88,6 @@ mb-2
 `;
 
 const Subtitle = tw.span`
-text-[#828fa3]
+text-montage
 text-sm
 `;
