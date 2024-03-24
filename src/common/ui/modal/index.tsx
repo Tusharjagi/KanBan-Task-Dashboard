@@ -4,13 +4,17 @@ import tw from "tailwind-styled-components";
 import { Portal } from "../portal";
 import { Backdrop } from "../backdrop";
 
-interface IProps {
+type WrappedComponentType = {
   open: boolean;
   onClose: VoidFunction;
   children?: ReactNode | ((props: { onClose: VoidFunction }) => ReactNode);
-}
+};
 
-function WrappedComponent({ open, onClose, children }: Readonly<IProps>) {
+function WrappedComponent({
+  open,
+  onClose,
+  children,
+}: Readonly<WrappedComponentType>) {
   useEffect(() => {
     if (open) {
       document.body.style.overflow = "hidden";
@@ -39,7 +43,11 @@ function WrappedComponent({ open, onClose, children }: Readonly<IProps>) {
   );
 }
 
-export function Modal({ open, children, ...rest }: Readonly<IProps>) {
+export function Modal({
+  open,
+  children,
+  ...rest
+}: Readonly<WrappedComponentType>) {
   if (!open) {
     return null;
   }
@@ -51,13 +59,12 @@ export function Modal({ open, children, ...rest }: Readonly<IProps>) {
   );
 }
 
-interface IModalTitleProps
-  extends DetailedHTMLProps<
-    HTMLAttributes<HTMLHeadingElement>,
-    HTMLHeadingElement
-  > {}
+type ModalTitleType = DetailedHTMLProps<
+  HTMLAttributes<HTMLHeadingElement>,
+  HTMLHeadingElement
+>;
 
-export function ModalTitle({ children, ...rest }: IModalTitleProps) {
+export function ModalTitle({ children, ...rest }: ModalTitleType) {
   return <Title {...rest}>{children}</Title>;
 }
 
@@ -82,7 +89,7 @@ const ModalWrapper = tw.div`
   dark:bg-gunmetal
   z-50
   shadow-lg
-  dark:shadow-[#454757]/50
+  dark:shadow-black-sapphire/50
 `;
 
 const Title = tw.h2`
