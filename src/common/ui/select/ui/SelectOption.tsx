@@ -1,38 +1,42 @@
-import { DetailedHTMLProps, LiHTMLAttributes, useCallback } from 'react'
-import tw from 'tailwind-styled-components'
-import { useSelectContext } from '../model/SelectProvider'
+import { DetailedHTMLProps, LiHTMLAttributes, useCallback } from "react";
+import tw from "tailwind-styled-components";
 
-interface IProps<T>
-  extends Omit<
-    DetailedHTMLProps<LiHTMLAttributes<HTMLLIElement>, HTMLLIElement>,
-    'value' | 'onClick'
-  > {
-  value: T
-}
+import { useSelectContext } from "../model/SelectProvider";
 
-export function SelectOption<T>({ value, children, ...rest }: IProps<T>) {
+type SelectOptionType<T> = Omit<
+  DetailedHTMLProps<LiHTMLAttributes<HTMLLIElement>, HTMLLIElement>,
+  "value" | "onClick"
+> & {
+  value: T;
+};
+
+export function SelectOption<T>({
+  value,
+  children,
+  ...rest
+}: SelectOptionType<T>) {
   const {
     value: selectedValue,
     changeValue,
     changeExpanded,
-  } = useSelectContext()
+  } = useSelectContext();
 
   const handleOnClick = useCallback(() => {
-    changeValue(value, children)
-    changeExpanded(false)
-  }, [value, children, changeValue, changeExpanded])
+    changeValue(value, children);
+    changeExpanded(false);
+  }, [value, children, changeValue, changeExpanded]);
 
-  const isSelected = value === selectedValue
+  const isSelected = value === selectedValue;
 
   return (
     <Wrapper
       onClick={handleOnClick}
       {...rest}
-      className={isSelected ? 'bg-black/10 dark:bg-white/10' : 'bg-transparent'}
+      className={isSelected ? "bg-black/10 dark:bg-white/10" : "bg-transparent"}
     >
       {children}
     </Wrapper>
-  )
+  );
 }
 
 const Wrapper = tw.li`
@@ -48,4 +52,4 @@ mb-1
 last:mb-0
 bg-black/40
 dark:hover:bg-white/40
-`
+`;
