@@ -11,6 +11,7 @@ module.exports = {
         "dark-gunmetal": "#20212c",
         "alice-blue": "#f4f7fd",
         gunmetal: "#2b2c37",
+        montage: "#828fa3",
       },
       maxWidth: {
         180: "11.25rem",
