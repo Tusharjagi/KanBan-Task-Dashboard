@@ -1,22 +1,23 @@
+import { useState } from "react";
+
 import { useAppDispatch } from "@/common/hooks/useRedux";
 import { TableColumnType } from "@/common/types/TableColumnType";
 import { mainActions } from "@/common/store/slices/main";
 import { Select, SelectOption } from "@/common/ui/select";
-import { useState } from "react";
 
-interface IProps {
+type TaskSelectType = {
   tableIndex: number;
   columnIndex: number;
   taskIndex: number;
   columns: TableColumnType[];
-}
+};
 
 export function TaskSelect({
   tableIndex,
   columnIndex,
   taskIndex,
   columns,
-}: IProps) {
+}: Readonly<TaskSelectType>) {
   const [selectedColumnIndex, setSelectedColumnIndex] = useState(columnIndex);
 
   const dispatch = useAppDispatch();
@@ -38,9 +39,9 @@ export function TaskSelect({
 
   return (
     <Select value={selectedColumnIndex} onChange={handleOnChange}>
-      {columns.map((e, i) => (
-        <SelectOption key={e.id} value={i}>
-          {e.title}
+      {columns.map((item, index) => (
+        <SelectOption key={item.id} value={index}>
+          {item.title}
         </SelectOption>
       ))}
     </Select>
