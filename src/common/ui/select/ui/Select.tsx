@@ -15,25 +15,21 @@ import { SelectProvider, useSelectContext } from "../model/SelectProvider";
 import { useOutside } from "@/common/hooks/useOutside";
 import { SelectOption } from "./SelectOption";
 
-interface IProps
-  extends Omit<
-    DetailedHTMLProps<
-      ButtonHTMLAttributes<HTMLButtonElement>,
-      HTMLButtonElement
-    >,
-    "onChange"
-  > {
+type WrappedComponentType = Omit<
+  DetailedHTMLProps<ButtonHTMLAttributes<HTMLButtonElement>, HTMLButtonElement>,
+  "onChange"
+> & {
   value?: any;
   onChange: (value: any) => void;
   placeHolderText?: string;
-}
+};
 
 function WrappedComponent({
   value,
   children,
   placeHolderText = "None",
   ...rest
-}: Readonly<Omit<IProps, "onChange">>) {
+}: Readonly<Omit<WrappedComponentType, "onChange">>) {
   const labelRef = useRef<HTMLButtonElement>(null);
   const listRef = useRef<HTMLUListElement>(null);
 
@@ -79,7 +75,11 @@ function WrappedComponent({
   );
 }
 
-export function Select({ value, onChange, ...rest }: Readonly<IProps>) {
+export function Select({
+  value,
+  onChange,
+  ...rest
+}: Readonly<WrappedComponentType>) {
   return (
     <SelectProvider value={value} onChange={onChange}>
       <WrappedComponent value={value} {...rest} />
@@ -104,7 +104,7 @@ w-full
 rounded-md
 border-[1px]
 h-10
-border-[#828fa3]
+border-montage
 `;
 
 const SelectList = tw.ul`
