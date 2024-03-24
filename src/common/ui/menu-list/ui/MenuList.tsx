@@ -110,7 +110,7 @@ fixed
 p-1
 rounded-md
 drop-shadow-md
-bg-[#f4f7fd]
-dark:bg-[#20212c]
+bg-alice-blue
+dark:bg-dark-gunmetal
 space-y-2
 `;
