@@ -1,4 +1,5 @@
 import tw from "tailwind-styled-components";
+
 import { TableListItem } from "./ListItem";
 import { useAppDispatch, useAppSelector } from "@/common/hooks/useRedux";
 import { mainActions } from "@/common/store/slices/main";
@@ -24,7 +25,12 @@ export function TableList() {
           const isActive = selectedTableIndex === i;
 
           return (
-            <TableListItem key={e.id} table={e} isActive={isActive} onClick={handleOnSelect(i)} />
+            <TableListItem
+              key={e.id}
+              table={e}
+              isActive={isActive}
+              onClick={handleOnSelect(i)}
+            />
           );
         })}
       </List>
@@ -34,7 +40,7 @@ export function TableList() {
 
 const Title = tw.h3`
 text-base
-text-[#828fa3]
+text-montage
 px-5
 mb-2
 `;

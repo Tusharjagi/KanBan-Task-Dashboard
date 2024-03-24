@@ -34,7 +34,7 @@ px-2
 py-1
 rounded
 border-[1px]
-border-[#828fa3]
+border-montage
 focus:outline-none
 focus:border-indigo-500
 placeholder:text-gray-600
