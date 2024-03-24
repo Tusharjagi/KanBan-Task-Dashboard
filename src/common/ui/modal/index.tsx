@@ -26,16 +26,12 @@ function WrappedComponent({
     };
   }, [open]);
 
-  const handleClose = () => {
-    onClose();
-  };
-
   return (
     <Portal>
-      <Wrapper open={open} onClick={handleClose} onClose={onClose}>
+      <Wrapper open={open} onClose={onClose}>
         <ModalWrapper onClick={(event) => event.stopPropagation()}>
           {typeof children === "function"
-            ? children({ onClose: handleClose })
+            ? children({ onClose: onClose })
             : children}
         </ModalWrapper>
       </Wrapper>
