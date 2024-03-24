@@ -1,17 +1,17 @@
-import tw from 'tailwind-styled-components'
-import { DetailedHTMLProps, LabelHTMLAttributes } from 'react'
-import { useInputContext } from '../model/InputProvider'
+import { DetailedHTMLProps, LabelHTMLAttributes } from "react";
+import tw from "tailwind-styled-components";
 
-interface IProps
-  extends Omit<
-    DetailedHTMLProps<LabelHTMLAttributes<HTMLLabelElement>, HTMLLabelElement>,
-    'htmlFor'
-  > {}
+import { useInputContext } from "../model/InputProvider";
 
-export function InputLabel(props: IProps) {
-  const { inputId } = useInputContext()
+type InputLabelType = Omit<
+  DetailedHTMLProps<LabelHTMLAttributes<HTMLLabelElement>, HTMLLabelElement>,
+  "htmlFor"
+>;
 
-  return <Wrapper htmlFor={inputId} {...props} />
+export function InputLabel(props: Readonly<InputLabelType>) {
+  const { inputId } = useInputContext();
+
+  return <Wrapper htmlFor={inputId} {...props} />;
 }
 
 const Wrapper = tw.label`
@@ -21,4 +21,4 @@ dark:text-white
 text-sm
 mb-2
 font-bold
-`
+`;
