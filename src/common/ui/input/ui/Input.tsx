@@ -1,10 +1,10 @@
-import { ReactNode } from 'react'
-import { InputProvider } from '../model/InputProvider'
+import { ReactNode } from "react";
+import { InputProvider } from "../model/InputProvider";
 
-interface IProps {
-  children?: ReactNode
-}
+type InputType = {
+  children?: ReactNode;
+};
 
-export function Input({ children }: IProps) {
-  return <InputProvider>{children}</InputProvider>
+export function Input({ children }: Readonly<InputType>) {
+  return <InputProvider>{children}</InputProvider>;
 }
