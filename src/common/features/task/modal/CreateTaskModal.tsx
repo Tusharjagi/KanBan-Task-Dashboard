@@ -1,6 +1,8 @@
-import { Modal, ModalTitle } from "@/common/ui/modal";
-import tw from "tailwind-styled-components";
 import { FormEvent, useState } from "react";
+import tw from "tailwind-styled-components";
+import { v4 as uuid } from "uuid";
+
+import { Modal, ModalTitle } from "@/common/ui/modal";
 import { Button } from "@/common/ui/button";
 import { useAppDispatch } from "@/common/hooks/useRedux";
 import { SubtaskType } from "@/common/types/SubtaskType";
@@ -10,21 +12,20 @@ import { TaskTitleField } from "./ui/TaskTitleField";
 import { TaskDescriptionField } from "./ui/TaskDescriptionField";
 import { TaskSubtasks } from "./ui/TaskSubtasks";
 import { TaskColumnSelect } from "./ui/TaskColumnSelect";
-import { v4 as uuid } from "uuid";
 
-interface IProps {
+type CreateTaskModalType = {
   open: boolean;
   onClose: VoidFunction;
   columns: TableColumnType[];
   tableIndex: number;
-}
+};
 
 export function CreateTaskModal({
   open,
   onClose: handleClose,
   columns,
   tableIndex,
-}: IProps) {
+}: Readonly<CreateTaskModalType>) {
   const modalProps = { open, onClose: handleClose };
 
   const [title, setTitle] = useState("");
