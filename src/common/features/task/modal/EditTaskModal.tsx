@@ -1,6 +1,7 @@
-import { Modal, ModalTitle } from "@/common/ui/modal";
-import tw from "tailwind-styled-components";
 import { FormEvent, useState } from "react";
+import tw from "tailwind-styled-components";
+
+import { Modal, ModalTitle } from "@/common/ui/modal";
 import { Button } from "@/common/ui/button";
 import { useAppDispatch } from "@/common/hooks/useRedux";
 import { SubtaskType } from "@/common/types/SubtaskType";
@@ -12,7 +13,7 @@ import { TaskColumnSelect } from "./ui/TaskColumnSelect";
 import { TaskType } from "@/common/types/TaskType";
 import { TableColumnType } from "@/common/types/TableColumnType";
 
-interface IProps {
+type EditTaskModalType = {
   open: boolean;
   onClose: VoidFunction;
   tableIndex: number;
@@ -20,7 +21,7 @@ interface IProps {
   taskIndex: number;
   task: TaskType;
   columns: TableColumnType[];
-}
+};
 
 export function EditTaskModal({
   open,
@@ -30,7 +31,7 @@ export function EditTaskModal({
   taskIndex,
   task,
   columns,
-}: IProps) {
+}: Readonly<EditTaskModalType>) {
   const modalProps = { open, onClose: handleClose };
 
   const [title, setTitle] = useState(task.title);
