@@ -1,3 +1,5 @@
+import { useRef } from "react";
+
 import { TaskList } from "@/common/components/task/list";
 import { TableType } from "@/common/types/TableType";
 import {
@@ -7,15 +9,17 @@ import {
 } from "@/common/components/layout";
 import { AddNewTaskButton } from "./AddNewTaskButton";
 import { ToggleMoreOptionsButton } from "./ToggleMoreOptionsButton";
-import { useRef } from "react";
 import { ListScroll } from "./ListScroll";
 
-interface IProps {
+type HomeTasksTabType = {
   table: TableType;
   tableIndex: number;
-}
+};
 
-export function HomeTasksTab({ table, tableIndex }: IProps) {
+export function HomeTasksTab({
+  table,
+  tableIndex,
+}: Readonly<HomeTasksTabType>) {
   const listRef = useRef<HTMLDivElement>(null);
 
   return (
