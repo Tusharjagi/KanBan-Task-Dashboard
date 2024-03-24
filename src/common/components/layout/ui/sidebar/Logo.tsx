@@ -1,7 +1,7 @@
 import Image from "next/image";
 import { useDispatch } from "react-redux";
-
 import tw from "tailwind-styled-components";
+
 import blackLogo from "@/common/assets/brand/black-logo.svg";
 import whiteLogo from "@/common/assets/brand/white-logo.svg";
 import { useAppSelector } from "@/common/hooks/useRedux";
@@ -16,13 +16,13 @@ export function Logo() {
   };
 
   return (
-    <div className="flex justify-start items-start cursor-pointer " onClick={handleOnSelect(0)}>
+    <button className="flex justify-start items-start cursor-pointer " onClick={handleOnSelect(0)}>
       {theme === "dark" ? (
         <LogoStyled alt="Brand logo" src={whiteLogo} />
       ) : (
         <LogoStyled alt="Brand logo" src={blackLogo} />
       )}
-    </div>
+    </button>
   );
 }
 
