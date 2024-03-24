@@ -1,10 +1,11 @@
-import { ReactNode } from 'react'
-import { TextAreaProvider } from '../model/TextAreaProvider'
+import { ReactNode } from "react";
 
-interface IProps {
-  children?: ReactNode
-}
+import { TextAreaProvider } from "../model/TextAreaProvider";
 
-export function TextArea({ children }: IProps) {
-  return <TextAreaProvider>{children}</TextAreaProvider>
+type TextAreaType = {
+  children?: ReactNode;
+};
+
+export function TextArea({ children }: Readonly<TextAreaType>) {
+  return <TextAreaProvider>{children}</TextAreaProvider>;
 }
