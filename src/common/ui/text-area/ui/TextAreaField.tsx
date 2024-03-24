@@ -1,19 +1,20 @@
-import tw from 'tailwind-styled-components'
-import { DetailedHTMLProps, TextareaHTMLAttributes, useEffect } from 'react'
-import { useTextAreaContext } from '../model/TextAreaProvider'
+import { DetailedHTMLProps, TextareaHTMLAttributes, useEffect } from "react";
+import tw from "tailwind-styled-components";
 
-interface IProps
-  extends DetailedHTMLProps<
-    TextareaHTMLAttributes<HTMLTextAreaElement>,
-    HTMLTextAreaElement
-  > {}
+import { useTextAreaContext } from "../model/TextAreaProvider";
 
-export function TextAreaField({ id, ...rest }: IProps) {
-  const { setTextAreaId } = useTextAreaContext()
+type TextAreaFieldType = DetailedHTMLProps<
+  TextareaHTMLAttributes<HTMLTextAreaElement>,
+  HTMLTextAreaElement
+>;
 
-  useEffect(() => setTextAreaId(id), [id])
+export function TextAreaField({ id, ...rest }: TextAreaFieldType) {
+  const { setTextAreaId } = useTextAreaContext();
 
-  return <Wrapper id={id} {...rest} />
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  useEffect(() => setTextAreaId(id), [id]);
+
+  return <Wrapper id={id} {...rest} />;
 }
 
 const Wrapper = tw.textarea`
@@ -24,9 +25,9 @@ px-2
 py-1
 rounded
 border-[1px]
-border-[#828fa3]
+border-montage
 focus:outline-none
 focus:border-indigo-500
 placeholder:text-gray-600
 bg-transparent
-`
+`;
