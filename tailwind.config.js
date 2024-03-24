@@ -12,6 +12,7 @@ module.exports = {
         "alice-blue": "#f4f7fd",
         gunmetal: "#2b2c37",
         montage: "#828fa3",
+        "black-sapphire": "#454757",
       },
       maxWidth: {
         180: "11.25rem",
