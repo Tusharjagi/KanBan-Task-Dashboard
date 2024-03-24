@@ -6,16 +6,22 @@ class MyDocument extends Document {
       <Html lang="en">
         <Head>
           <meta charSet="UTF-8" />
-          <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+          <meta
+            name="viewport"
+            content="width=device-width, initial-scale=1.0"
+          />
           <meta name="description" content="Kanban task management dashboard" />
           <meta name="keywords" content="keywords, separated, by, commas" />
           <meta name="author" content="Tango" />
           <meta property="og:title" content="kanban dashboard" />
-          <meta property="og:description" content="Kanban task management dashboard" />
+          <meta
+            property="og:description"
+            content="Kanban task management dashboard"
+          />
           <meta property="og:type" content="website" />
           <meta property="og:url" content="https://kanban.com" />
-          <meta property="og:image" content="https://kanban.com/og-image.jpg" />
-          <link rel="icon" href="/favicon.ico" />
+          <meta property="og:image" content="/title-kanban.png" />
+          <link rel="icon" href="/planning.png" />
         </Head>
         <body>
           <Main />
