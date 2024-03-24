@@ -1,17 +1,18 @@
-import { Portal } from '../portal'
-import { Backdrop } from '../backdrop'
-import tw from 'tailwind-styled-components'
-import { Button } from '../button'
+import tw from "tailwind-styled-components";
+
+import { Portal } from "../portal";
+import { Backdrop } from "../backdrop";
+import { Button } from "../button";
 
 interface IProps {
-  title: string
-  subtitle: string
-  confirmText: string
-  cancelText: string
-  open: boolean
-  onClose: VoidFunction
-  onConfirm?: VoidFunction
-  onCancel?: VoidFunction
+  title: string;
+  subtitle: string;
+  confirmText: string;
+  cancelText: string;
+  open: boolean;
+  onClose: VoidFunction;
+  onConfirm?: VoidFunction;
+  onCancel?: VoidFunction;
 }
 
 export function Dialog({
@@ -33,15 +34,13 @@ export function Dialog({
             <Subtitle>{subtitle}</Subtitle>
             <ActionsRow>
               <ConfirmButton onClick={onConfirm}>{confirmText}</ConfirmButton>
-              <CancelButton onClick={onCancel ?? onClose}>
-                {cancelText}
-              </CancelButton>
+              <CancelButton onClick={onCancel ?? onClose}>{cancelText}</CancelButton>
             </ActionsRow>
           </Modal>
         </Wrapper>
       </Portal>
     )
-  )
+  );
 }
 
 const Wrapper = tw(Backdrop)`
@@ -55,44 +54,48 @@ items-center
 justify-center
 z-50
 bg-black/60
-`
+`;
 
 const Modal = tw.div`
 relative
 p-7
-bg-[#f4f7fd]
-dark:bg-[#2b2c37]
+bg-alice-blue
+dark:bg-gunmetal
 max-w-sm
 dark:shadow-lg
 rounded-md
 dark:shadow-[#454757]/50
-`
+`;
 
 const Title = tw.h2`
 text-xl
 text-red-500
 mb-5
-`
+flex
+justify-center
+items-center
+`;
 
 const Subtitle = tw.p`
 text-gray-600
+dark:text-zinc-300
 text-sm
 mb-5
-`
+`;
 
 const ActionsRow = tw.div`
 flex
 justify-between
-`
+`;
 
 const ConfirmButton = tw(Button)`
 text-white
 bg-red-500
 px-5
-`
+`;
 
 const CancelButton = tw(Button)`
 text-indigo-500
 bg-indigo-500/20
 px-5
-`
+`;
