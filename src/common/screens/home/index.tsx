@@ -1,20 +1,20 @@
-import { Layout } from '@/common/components/layout'
-import { useAppSelector } from '@/common/hooks/useRedux'
-import { HomeTasksTab } from './ui/HomeTasksTab'
-import { HomeWelcomeTab } from './ui/HomeWelcomeTab'
+import { Layout } from "@/common/components/layout";
+import { useAppSelector } from "@/common/hooks/useRedux";
+import { HomeTasksTab } from "./ui/HomeTasksTab";
+import { HomeWelcomeTab } from "./ui/HomeWelcomeTab";
 
 export function HomeScreen() {
-  const { tables, selectedTableIndex } = useAppSelector((x) => x.mainSlice)
+  const { tables, selectedTableIndex } = useAppSelector((x) => x.mainSlice);
 
   const table =
-    typeof selectedTableIndex === 'number'
+    typeof selectedTableIndex === "number"
       ? tables[selectedTableIndex]
-      : undefined
+      : undefined;
 
   const tabs: Record<number, JSX.Element> = {
     1: <HomeTasksTab table={table!} tableIndex={selectedTableIndex!} />,
     0: <HomeWelcomeTab />,
-  }
+  };
 
-  return <Layout>{tabs[+Boolean(table)]}</Layout>
+  return <Layout>{tabs[+Boolean(table)]}</Layout>;
 }
