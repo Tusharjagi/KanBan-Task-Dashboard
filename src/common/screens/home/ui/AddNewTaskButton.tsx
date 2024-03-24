@@ -8,12 +8,15 @@ import { TableType } from "@/common/types/TableType";
 import { Button } from "@/common/ui/button";
 import { bool2string } from "@/common/utils";
 
-interface IProps {
+type AddNewTaskButtonType = {
   table: TableType;
   tableIndex: number;
-}
+};
 
-export function AddNewTaskButton({ table, tableIndex }: Readonly<IProps>) {
+export function AddNewTaskButton({
+  table,
+  tableIndex,
+}: Readonly<AddNewTaskButtonType>) {
   const [open, toggleOpen] = useToggler(false);
   const isDesktop = useMediaQuery("(min-width: 768px)");
   const [mounted, , setMounted] = useToggler(false);
