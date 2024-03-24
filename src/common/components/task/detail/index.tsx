@@ -1,12 +1,13 @@
+import tw from "tailwind-styled-components";
+
 import { TableColumnType } from "@/common/types/TableColumnType";
 import { TaskType } from "@/common/types/TaskType";
 import { Modal } from "@/common/ui/modal";
-import tw from "tailwind-styled-components";
 import { ToggleMoreOptionsButton } from "./ui/ToggleMoreOptionsButton";
 import { SubtaskList } from "./ui/SubtaskList";
 import { TaskSelect } from "./ui/TaskSelect";
 
-interface IProps {
+type DetailTaskModalType = {
   open: boolean;
   onClose: VoidFunction;
   tableIndex: number;
@@ -14,7 +15,7 @@ interface IProps {
   taskIndex: number;
   task: TaskType;
   columns: TableColumnType[];
-}
+};
 
 export function DetailTaskModal({
   open,
@@ -24,7 +25,7 @@ export function DetailTaskModal({
   taskIndex,
   task,
   columns,
-}: IProps) {
+}: Readonly<DetailTaskModalType>) {
   const modalProps = { open, onClose };
 
   return (
@@ -72,6 +73,6 @@ font-bold
 
 const Description = tw.p`
 text-sm
-text-[#828fa3]
+text-montage
 mb-7
 `;
