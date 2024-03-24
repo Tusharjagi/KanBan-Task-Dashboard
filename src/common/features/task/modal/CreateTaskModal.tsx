@@ -32,32 +32,46 @@ export function CreateTaskModal({
   const [description, setDescription] = useState("");
   const [subtasks, setSubtasks] = useState<SubtaskType[]>([]);
   const [selectedColumnIndex, setSelectedColumnIndex] = useState(0);
+  const [showError, setShowError] = useState(false);
 
   const dispatch = useAppDispatch();
 
   const handleOnSubmit = (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
 
-    dispatch(
-      mainActions.addTask({
-        tableIndex,
-        columnIndex: selectedColumnIndex,
-        task: {
-          id: uuid(),
-          title,
-          description,
-          subtasks,
-        },
-      }),
-    );
+    if (title.length > 0) {
+      dispatch(
+        mainActions.addTask({
+          tableIndex,
+          columnIndex: selectedColumnIndex,
+          task: {
+            id: uuid(),
+            title,
+            description,
+            subtasks,
+          },
+        }),
+      );
+      handleClose();
+    } else {
+      setShowError(true);
+    }
+  };
 
-    handleClose();
+  const handleOnChange = (event: FormEvent<HTMLFormElement>) => {
+    const target = event.target as HTMLInputElement;
+    target.value.length > 0 && setShowError(false);
   };
 
   return (
     <Modal {...modalProps}>
-      <form onSubmit={handleOnSubmit}>
+      <form onSubmit={handleOnSubmit} onChange={handleOnChange}>
         <ModalTitle className="mb-7">Add new task</ModalTitle>
+        {showError && (
+          <div className="text-white flex justify-center items-center text-sm my-1 mx-10 bg-red-600 rounded-2xl">
+            {`Board Name shouldn't be empty`}
+          </div>
+        )}
         <TaskTitleField title={title} setTitle={setTitle} />
         <TaskDescriptionField
           description={description}

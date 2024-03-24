@@ -38,34 +38,49 @@ export function EditTaskModal({
   const [description, setDescription] = useState(task.description);
   const [subtasks, setSubtasks] = useState<SubtaskType[]>(task.subtasks);
   const [selectedColumnIndex, setSelectedColumnIndex] = useState(columnIndex);
+  const [showError, setShowError] = useState(false);
 
   const dispatch = useAppDispatch();
 
   const handleOnSubmit = (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
 
-    dispatch(
-      mainActions.updateTask({
-        tableIndex,
-        oldColumnIndex: columnIndex,
-        newColumnIndex: selectedColumnIndex,
-        taskIndex,
-        task: {
-          ...task,
-          title,
-          description,
-          subtasks,
-        },
-      }),
-    );
+    if (title.length > 0) {
+      dispatch(
+        mainActions.updateTask({
+          tableIndex,
+          oldColumnIndex: columnIndex,
+          newColumnIndex: selectedColumnIndex,
+          taskIndex,
+          task: {
+            ...task,
+            title,
+            description,
+            subtasks,
+          },
+        }),
+      );
 
-    handleClose();
+      handleClose();
+    } else {
+      setShowError(true);
+    }
+  };
+
+  const handleOnChange = (event: FormEvent<HTMLFormElement>) => {
+    const target = event.target as HTMLInputElement;
+    target.value.length > 0 && setShowError(false);
   };
 
   return (
     <Modal {...modalProps}>
-      <form onSubmit={handleOnSubmit}>
+      <form onSubmit={handleOnSubmit} onChange={handleOnChange}>
         <ModalTitle className="mb-7">Edit task</ModalTitle>
+        {showError && (
+          <div className="text-white flex justify-center items-center text-sm my-1 mx-10 bg-red-600 rounded-2xl">
+            {`Board Name shouldn't be empty`}
+          </div>
+        )}
         <TaskTitleField title={title} setTitle={setTitle} />
         <TaskDescriptionField
           description={description}
