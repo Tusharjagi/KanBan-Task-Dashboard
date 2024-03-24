@@ -1,26 +1,32 @@
-import { TableColumnType } from "@/common/types/TableColumnType";
-import tw from "tailwind-styled-components";
-import { TaskItem } from "../item/TaskItem";
 import { DragEvent } from "react";
+import tw from "tailwind-styled-components";
+
+import { TableColumnType } from "@/common/types/TableColumnType";
+import { TaskItem } from "../item/TaskItem";
 import { useAppDispatch } from "@/common/hooks/useRedux";
 import { mainActions } from "@/common/store/slices/main";
 import { DRAG_TRANSFER_KEY } from "@/common/data/constants";
 
-interface IProps {
+type ColumnType = {
   column: TableColumnType;
   columns: TableColumnType[];
   tableIndex: number;
   columnIndex: number;
-}
+};
 
-export function Column({ column, columns, tableIndex, columnIndex }: IProps) {
+export function Column({
+  column,
+  columns,
+  tableIndex,
+  columnIndex,
+}: Readonly<ColumnType>) {
   const { title, tasks } = column;
 
   const dispatch = useAppDispatch();
 
-  const handleOnDrop = (e: DragEvent<HTMLDivElement>) => {
+  const handleOnDrop = (event: DragEvent<HTMLDivElement>) => {
     const { columnIndex: prevColumnIndex, taskIndex: dropTaskIndex } =
-      JSON.parse(e.dataTransfer.getData(DRAG_TRANSFER_KEY));
+      JSON.parse(event.dataTransfer.getData(DRAG_TRANSFER_KEY));
 
     if (prevColumnIndex !== columnIndex) {
       dispatch(
@@ -34,8 +40,8 @@ export function Column({ column, columns, tableIndex, columnIndex }: IProps) {
     }
   };
 
-  const handleOnDragOver = (e: DragEvent<HTMLDivElement>) => {
-    e.preventDefault();
+  const handleOnDragOver = (event: DragEvent<HTMLDivElement>) => {
+    event.preventDefault();
   };
 
   return (
@@ -57,13 +63,13 @@ export function Column({ column, columns, tableIndex, columnIndex }: IProps) {
 
 const Wrapper = tw.div`
 space-y-5
-basis-[280px]
+basis-280
 shrink-0
 `;
 
 const Title = tw.h4`
 text-[15px]
-text-[#828fa3]
+text-montage
 font-bold
 mb-4
 `;
