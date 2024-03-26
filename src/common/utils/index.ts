@@ -25,5 +25,5 @@ export const bool2string = (value: boolean) => {
 };
 
 export const string2bool = (value: "true" | "false") => {
-  return value === "true" ? true : false;
+  return value === "true";
 };
